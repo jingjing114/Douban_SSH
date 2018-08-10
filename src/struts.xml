@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+<constant name="struts.enable.DynamicMethodInvocation" value="true"></constant>
+
+<package name="cxl" namespace="/" extends="struts-default">
+
+<action name="useraction_*" class="com.neu.cxl.web.UserAction" method="{1}">
+<result name="success">/success.jsp</result>
+<result name="input">/register.jsp</result>
+<result name="register">/register.jsp</result>
+<result name="select">/userManage.jsp</result>
+<result name="main">/in_index.jsp</result>
+<result name="login">/login.jsp</result>
+<result name="single">/single.jsp</result>
+</action>
+
+<action name="upload" class="com.neu.cxl.web.fileUploadAction" method="upload">
+<result name="success">/single.jsp</result>
+<result name="input">/single.jsp</result><!-- 发生错误或拦截时默认返回input对应的视图 -->
+<interceptor-ref name="defaultStack">
+<param name="fileUpload.maximumsize">4194304</param>
+<param name="fileUpload.allowedExtensions">.bmp,.gif,.jpg,.png</param>
+<param name="fileUpload.allowedTypes">application/x-MS-bmp,image/gif,image/jpeg,image/png</param>
+</interceptor-ref>
+</action>
+
+<action name="movieaction_*" class="com.neu.cxl.web.ResourceAction" method="{1}">
+<result name="selectmovie">/moviesearch.jsp</result>
+<result name="movieinfo">/moviepage.jsp</result>
+<result name="selecthot">/in_index.jsp</result>
+</action>
+
+<action name="reviewaction_*" class="com.neu.cxl.web.ReviewAction" method="{1}">
+<result name="selectreviewuser">/single.jsp</result>
+</action>
+</package>
+</struts>    
