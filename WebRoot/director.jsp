@@ -36,6 +36,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</head>
 
 <style>
+ .div_img{width:60px;height:60px;border-radius:100px; overflow:hidden}
+  .div_img img{width:100%;height:100%}
 .actor1{
 		float: left;
 	margin-top: 10px;
@@ -44,18 +46,18 @@ margin-left: 50px;
 
 </style>
 <script>
-function show(){
+	function show(){
 
-var session="<%=session.getAttribute("username")%>"
+var session="<%=session.getAttribute("user")%>"
 //alert(session)
 if(session=="null")
 {
-	document.getElementById("div_user").innerHTML="<div  class='col-md-3 col-sm-12 text-right'><ul class='nav-icons'><li><a href='register.html'><i class='ion-person-add'></i> <div> 注册</div></a></li><li><a href='login.html'><i class='ion-person'></i><div>登录</div></a></li></ul></div>"
+	document.getElementById("div_user").innerHTML="<div  class='col-md-3 col-sm-12 text-right'><ul class='nav-icons'><li><a href='register.jsp'><i class='ion-person-add'></i> <div> 注册</div></a></li><li><a href='login.jsp'><i class='ion-person'></i><div>登录</div></a></li></ul></div>"
 	document.getElementById("li_user").style.display="none"
 }
 else
 {
-	document.getElementById("div_user").innerHTML="<div  class='col-md-3 col-sm-12 text-right'><ul class='nav-icons'><li><img class='img-circle' src='${sessionScope.user.getIcon()}' width='45px'/></li><li><a href='single.jsp'><div>${sessionScope.user.getUserName()}</div></a></li></ul></div>"
+	document.getElementById("div_user").innerHTML="<div  class='col-md-3 col-sm-12 text-right'><ul class='nav-icons'><li><div class='div_img'><img class='img-circle' src='${sessionScope.user.getIcon()}' /></div></li><li><a href='reviewaction_selectReview?user.username=${sessionScope.user.getUsername()}'><span>${sessionScope.user.getUsername()}</span></a></li></ul></div>"
 }
 
 }
@@ -74,9 +76,9 @@ else
 						</div>
 						<div class="col-md-6 col-sm-12">
 							
-								<form class="search" autocomplete="off" action="SelectMovieServletByUser">
+								<form class="search" autocomplete="off" action="movieaction_selectMovie">
 							
-								<div class="form-group">
+							<div class="form-group">
 									<div class="input-group">
 										<input type="text" name="keyword" class="form-control" placeholder="输入电影">									
 										<div class="input-group-btn">
@@ -102,9 +104,9 @@ else
 										<li><a href="#">摩天营救</a></li>
 									</ul>-->
 								</div>
-							</form>												
+							</form>											
 						</div>
-						<div id="div_user"></div>
+						<div id="div_user" >
 						</div>
 						
 				</div>
@@ -175,7 +177,7 @@ else
 													</div>
 												</div>
 												<ul class="vertical-menu">
-													<li><a href="SelectMovieServletByUser?type=avgscore&keyword=9"><i class="ion-ios-circle-outline"></i> 高分电影</a></li>
+													<li><a href="movieaction_selectMovie?type=avgscore&keyword=9"><i class="ion-ios-circle-outline"></i> 高分电影</a></li>
 													<li><a href="#"><i class="ion-ios-circle-outline"></i> 热门影评</a></li>
 													
 													<li><a href="#"><i class="ion-ios-circle-outline"></i> 正在上映</a></li>
@@ -246,11 +248,11 @@ else
 							
 							<li id="li_user" class="dropdown magz-dropdown"><a href="#">个人中心 <i class="ion-ios-arrow-right"></i></a>
 								<ul class="dropdown-menu">
-									<li><a href="single.jsp"><i class="icon ion-person"></i>我的主页</a></li>
+									<li><a href="reviewaction_selectReview?user.username=${sessionScope.user.getUsername()}"><i class="icon ion-person"></i>我的主页</a></li>
 									
-									<li><a href="single.jsp"><i class="icon ion-chatbox"></i> 我的评论</a></li>				
-									<li><a href="passwordchange.html"><i class="icon ion-chatbox"></i> 重置密码</a></li>		
-									<li><a href="RemoveServlet"><i class="icon ion-log-out"></i> 注销</a></li>
+									<li><a href="reviewaction_selectReview?user.username=${sessionScope.user.getUsername()}"><i class="icon ion-chatbox"></i> 我的评论</a></li>				
+									<li><a href="passwordchange.jsp"><i class="icon ion-chatbox"></i> 重置密码</a></li>		
+									<li><a href="useraction_logout"><i class="icon ion-log-out"></i> 注销</a></li>
 								</ul>
 							</li>
 						</ul>
@@ -272,10 +274,10 @@ else
         
     <div id="dale_movie_subject_top_icon"></div>
     <h1>
-    <c:forEach var="d" items="${requestScope.director}" varStatus="status">
-         <span property="v:itemreviewed">${d.getDirectorName()}</span>
+     
+         <span property="v:itemreviewed">${requestScope.director.getDirectorname()}</span>
             
-  </c:forEach>
+
       
     </h1>
 
@@ -292,9 +294,9 @@ else
 
 
 <div id="mainpic" class="">
-   <c:forEach var="d" items="${requestScope.director}" varStatus="status">
-    <img src="${d.getDirectorPhoto()}"  height="218" width="180"  title="点击看更多海报" / >
-  </c:forEach>
+   
+    <img src="${requestScope.director.getDirectorphoto()}"  height="218" width="180"  title="点击看更多海报" / >
+ 
    
 </div>
 
@@ -303,25 +305,25 @@ else
 
 <div id="info">
         <span ><span class='pl'>性别</span>: 
-         <c:forEach var="d" items="${requestScope.director}" varStatus="status">
-  		 <span>${d.getDirectorSex()}</span>
-  		 </c:forEach></span>
+         
+  		 <span>${requestScope.director.getDirectorsex()}</span>
+  		 
         <br>
        <span class="actor3"><span class='pl'>星座</span>:
-        <c:forEach var="d" items="${requestScope.director}" varStatus="status">
-  		 <span>${d.getDirectorSign()}</span> 
-  		 </c:forEach></span>
+       
+  		 <span>${requestScope.director.getDirectorsign()}</span>
+  		
        <br/>
         <span class="pl">生日:</span> 
-         <c:forEach var="d" items="${requestScope.director}" varStatus="status">
-  		     <span property="v:genre">${d.getDirectorBirthday()}</span> 
-  		 </c:forEach>
+        
+  		     <span property="v:genre">${requestScope.director.getDirectorbirthday()}</span> 
+  		
         <br/>
         
         <span class="pl">职业:</span> 
-         <c:forEach var="d" items="${requestScope.director}" varStatus="status">
-  		     <span property="v:genre">${d.getDirectorWork()}</span> 
-  		 </c:forEach>
+         
+  		     <span property="v:genre">${requestScope.director.getDirectorwork()}</span> 
+  		 
         <br/>
         
         
@@ -341,9 +343,7 @@ else
 
         <div class="ll bigstar bigstar40"></div>
         <div class="rating_sum">
-                   <c:forEach var="m" items="${requestScope.movie}" varStatus="status">
-  		     <span property="v:genre"><font color="red">${m.getMovieReviewNumber()}</font></span>人评价
-  		 </c:forEach>
+                   
                 
                
         </div>
@@ -397,9 +397,9 @@ else
             <div class="indent" id="link-report">
                     
                         <span property="v:summary" class="">
-                               <c:forEach var="d" items="${requestScope.director}" varStatus="status">
-  		     <span property="v:genre">${d.getDirectorIntroduction()}</span>
-  		 </c:forEach>
+                              
+  		     <span property="v:genre">${requestScope.director.getDirectorintroduction()}</span>
+  		 
                                     <br />
                                 　
                         </span>
@@ -420,17 +420,17 @@ else
 <div id="celebrities" class="celebrities related-celebrities">
 
 <br>
-<br>
-<br>
+
+
   
     <h2>
-        影人图片
+        相关电影
              
     </h2>
 <br>
-<br>
-  <c:forEach var="d" items="${requestScope.director}" varStatus="status">
-  <div class="actor1"><img src="${d.getDirectorPhoto()}" height="218" width="180"><p>${a.getDirectorName()}<p></div>
+
+  <c:forEach var="d" items="${requestScope.directortomovie}" varStatus="status">
+  <div class="actor1"><a href="movieaction_movieInfo?resource.movieid=${a.getMovieid()}"><img src="${d.getMovieimgurl()}" height="218" width="180"><p>${d.getMoviename()}</p></a></div>
   
   </c:forEach>
 </div>

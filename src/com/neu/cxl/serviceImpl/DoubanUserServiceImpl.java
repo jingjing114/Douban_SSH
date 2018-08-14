@@ -18,6 +18,7 @@ public class DoubanUserServiceImpl implements DoubanUserService{
 	//注册
 	public boolean register(DoubanUser doubanUser) {
 		doubanUser.setRole("普通会员");
+		doubanUser.setIcon("upload/userIcon/img01.jpg");
 		if(this.doubanUserDAO.register(doubanUser)>0)
 		{
 		return true;

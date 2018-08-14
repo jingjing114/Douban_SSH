@@ -56,7 +56,7 @@ margin-left:380px;
 </style>
 <script>
 
-	function show(){
+function show(){
 
 var session="<%=session.getAttribute("user")%>"
 //alert(session)
@@ -64,7 +64,8 @@ if(session=="null")
 {
 	document.getElementById("div_user").innerHTML="<div  class='col-md-3 col-sm-12 text-right'><ul class='nav-icons'><li><a href='register.jsp'><i class='ion-person-add'></i> <div> 注册</div></a></li><li><a href='login.jsp'><i class='ion-person'></i><div>登录</div></a></li></ul></div>"
 	document.getElementById("li_user").style.display="none"
-	document.getElementById("login_review").innerHTML="亲，<a href='login.html'>登录</a>后才可以评论哦！"
+	document.getElementById("a_review").style.display="none"
+	document.getElementById("login_review").innerHTML="亲，<a href='login.jsp'>登录</a>后才可以评论哦！"
 }
 else
 {
@@ -75,7 +76,7 @@ else
 
 function publish()
   {
-  window.open("publishreview.jsp?movieid=${requestScope.movie.getMovieid()}&moviename=${requestScope.movie.getMoviename()}&reviewuser=${sessionScope.user.getUsername()}",'短评','height=300,width=520,top=400,left=800,toolbar=no,menubar=no,scrollbars=no,resizable=no,location=no,status=no');
+  window.open("publishreview.jsp?movieid=${requestScope.movie.getMovieid()}&moviename=${requestScope.movie.getMoviename()}&reviewuser=${sessionScope.user.getUsername()}",'短评','height=300,width=520,top=400,left=800,toolbar=no,menubar=no,scrollbars=no,resizable=no,location=0,status=1');
 
   }
 
@@ -169,21 +170,21 @@ function publish()
 							<li class="dropdown magz-dropdown"><a href="#">关于抽象
 							</a>
 								<ul class="dropdown-menu">
-									<li><a href="category.html">加入我们</a></li>
-									<li class="dropdown magz-dropdown"><a href="category.html">公司部门 <i class="ion-ios-arrow-right"></i></a>
+									<li><a href="#">加入我们</a></li>
+									<li class="dropdown magz-dropdown"><a href="#">公司部门 <i class="ion-ios-arrow-right"></i></a>
 										<ul class="dropdown-menu">
-											<li><a href="category.html">市场部</a></li>
-											<li class="dropdown magz-dropdown"><a href="category.html">事业部 <i class="ion-ios-arrow-right"></i></a>
+											<li><a href="#">市场部</a></li>
+											<li class="dropdown magz-dropdown"><a href="#">事业部 <i class="ion-ios-arrow-right"></i></a>
 												<ul class="dropdown-menu">
-													<li><a href="category.html">抽象影业</a></li>
-													<li><a href="category.html">抽象传媒</a></li>
-													<li><a href="category.html">抽象娱乐</a></li>
+													<li><a href="#">抽象影业</a></li>
+													<li><a href="#">抽象传媒</a></li>
+													<li><a href="#">抽象娱乐</a></li>
 												</ul>
 											</li>
-											<li><a href="category.html">财务部</a>
+											<li><a href="#">财务部</a>
 										</ul>
 									</li>
-									<li><a href="category.html">抽象周报</a></li>
+									<li><a href="#">抽象周报</a></li>
 									
 								</ul>
 							</li>
@@ -194,69 +195,55 @@ function publish()
 											<a href="www.baidu.com"><div class="col-md-3">
 												<div class="row">
 													<div class="col-md-12">
-														<h2 class="megamenu-title">电影分类</h2>
-													</div>
-												</div>
-												<ul class="vertical-menu">
-													<li><a href="movieaction_selectMovie?type=avgscore&keyword=9"><i class="ion-ios-circle-outline"></i> 高分电影</a></li>
-													<li><a href="#"><i class="ion-ios-circle-outline"></i> 热门影评</a></li>
-													
-													<li><a href="#"><i class="ion-ios-circle-outline"></i> 正在上映</a></li>
-													
-												</ul>
-											</div></a>
-											<div class="col-md-9">
-												<div class="row">
-													<div class="col-md-12">
-														<h2 class="megamenu-title">热门电影</h2>
+												<h2 class="megamenu-title">热门电影</h2>
 													</div>
 												</div>
 												<div class="row">
 													<article class="article col-md-4 mini">
 														<div class="inner">
 															<figure>
-																<a href="single.html">
-																	<img src="images/yao.jpg" alt="Sample Article">
+																<a href="#">
+																	<img src="images/yao.jpg" alt="Sample Article" width="252" height="180">
 																</a>
 															</figure>
 															<div class="padding">
 																<div class="detail">
 																	<div class="time">December 10, 2018</div>
-																	<div class="category"><a href="category.html">了解详情</a></div>
+																	<div class="category"><a href="movieaction_movieInfo?resource.movieid=241">了解详情</a></div>
 																</div>
-																<h2><a href="single.html">我不是药神</a></h2>
+																<h2><a href="#">我不是药神</a></h2>
 															</div>
 														</div>
 													</article>
 													<article class="article col-md-4 mini">
 														<div class="inner">
 															<figure>
-																<a href="single.html">
-																	<img src="images/ran.jpg" alt="Sample Article">
+																<a href="#">
+																	<img src="images/巨齿鲨.jpg" alt="Sample Article" width="252" height="180">
 																</a>
 															</figure>
 															<div class="padding">
 																<div class="detail">
-																	<div class="time">December 11, 1996</div>
-																	<div class="category"><a href="category.html">了解详情</a></div>
+																	<div class="time">August 10, 2018</div>
+																	<div class="category"><a href="movieaction_movieInfo?resource.movieid=4028ab7e65371c830165371d628b0000">了解详情</a></div>
 																</div>
-																<h2><a href="moviepage.html">燃烧烈爱</a></h2>
+																<h2><a href="#">巨齿鲨</a></h2>
 															</div>
 														</div>
 													</article>
 													<article class="article col-md-4 mini">
 														<div class="inner">
 															<figure>
-																<a href="single.html">
-																	<img src="images/yourname.jpg" alt="Sample Article"ur>
+																<a href="#">
+																	<img src="images/yourname.jpg" alt="Sample Article" width="252" height="180">
 																</a>
 															</figure>
 															<div class="padding">
 																<div class="detail">
 																	<div class="time">June 14, 2016</div>
-																	<div class="category"><a href="category.html">了解详情</a></div>
+																	<div class="category"><a href="movieaction_movieInfo?resource.movieid=14">了解详情</a></div>
 																</div>
-																<h2><a href="single.html">你的名字</a></h2>
+																<h2><a href="#">你的名字</a></h2>
 															</div>
 														</div>
 													</article>
@@ -316,7 +303,7 @@ function publish()
 
 <div id="mainpic" class="">
  
-        <img src="${requestScope.movie.getMovieimgurl()}" title="点击看更多海报"  />
+        <img src="${requestScope.movie.getMovieimgurl()}" title="点击看更多海报"  width="270" height="380"/>
 
    
 </div>
@@ -327,12 +314,12 @@ function publish()
 <div id="info">
         <span ><span class='pl'>导演</span>: 
          <c:forEach var="d" items="${requestScope.director}" varStatus="status">
-  		 <a href="SelectDirectorByIdServlet?directorid=${d.getDirectorid()}" rel="v:directedBy">${d.getDirectorname()}</a>/
+  		 <a href="aadaction_selectDirector?director.directorid=${d.getDirectorid()}" rel="v:directedBy">${d.getDirectorname()}</a>/
   		 </c:forEach></span>
         <br>
        <span class="actor3"><span class='pl'>主演</span>:
         <c:forEach var="a" items="${requestScope.actor}" varStatus="status">
-  		 <a href="SelectActorByIdServlet?actorid=${a.getActorid()}" rel="v:directedBy">${a.getActorname()}</a>/    
+  		 <a href="aadaction_selectActor?actor.actorid=${a.getActorid()}" rel="v:directedBy">${a.getActorname()}</a>/    
   		 </c:forEach></span>
        <br/>
         <span class="pl">类型:</span> 
@@ -480,378 +467,47 @@ function publish()
 <br>
   
   <c:forEach var="a" items="${requestScope.actor}" varStatus="status">
-  		 <div class="actor1"><a href="SelectActorByIdServlet?actorid=${a.getActorId()}"><img src="${a.getActorPhoto()}" height="218" width="180"><p>${a.getActorName()}<p></a></div>  
+  		 <div class="actor1"><a href="aadaction_selectActor?actor.actorid=${a.getActorid()}"><img src="${a.getActorphoto()}" height="218" width="180"><p>${a.getActorname()}<p></a></div>  
   		 </c:forEach></span>
 </div>
-
-
-
-
-    
-    <div id="related-pic" class="related-pic">
-        
-    
-    
-    
-
-
-        <ul class="related-pic-bd  wide_videos">
-        
-               
-            
-        </ul>
-    </div>
-
-
-
-    
-    
-
-
-
-
-<style type="text/css">
-.award li { display: inline; margin-right: 5px }
-.awards { margin-bottom: 20px }
-.awards h2 { background: none; color: #000; font-size: 14px; padding-bottom: 5px; margin-bottom: 8px; border-bottom: 1px dashed #dddddd }
-.awards .year { color: #666666; margin-left: -5px }
-.mod { margin-bottom: 25px }
-.mod .hd { margin-bottom: 10px }
-.mod .hd h2 {margin:24px 0 3px 0}
-</style>
-
-
-<div class="mod">
-   
-        
-</div>
-
-    
-
-
-
-
-
-
-
-
-    <div id="recommendations" class="">
-        
- 
-<section class="topics mod">
-   
-<section class="subject-topics">
-    
-    <div id="topic-items"></div>
-
-    <script>
-        window.subject_id = 26842702;
-        window.join_label_text = '写影评参与';
-
-        window.topic_display_count = 4;
-        window.topic_item_display_count = 1;
-        window.no_content_fun_call_name = "no_topic";
-
-        window.guideNode = document.getElementById('topic-guide');
-        window.guideNodeClose = document.getElementById('topic-guide-close');
-    </script>
-    
-        <link rel="stylesheet" href="https://img3.doubanio.com/f/ithildin/f731c9ea474da58c516290b3a6b1dd1237c07c5e/css/export/subject_topics.css">
-        <script src="https://img3.doubanio.com/f/ithildin/d3590fc6ac47b33c804037a1aa7eec49075428c8/js/export/moment-with-locales-only-zh.js"></script>
-        <script src="https://img3.doubanio.com/f/ithildin/c600fdbe69e3ffa5a3919c81ae8c8b4140e99a3e/js/export/subject_topics.js"></script>
-
-</section>
-
-    <script>
-        function no_topic(){
-            $('#content .topics').remove();
-        }
-    </script>
-</section>
-
-<section class="reviews mod movie-content">
-
-<style>
-#gallery-topics-selection {
-  position: fixed;
-  width: 595px;
-  padding: 40px 40px 33px 40px;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.2);
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  z-index: 9999;
-}
-#gallery-topics-selection h1 {
-  font-size: 18px;
-  color: #007722;
-  margin-bottom: 36px;
-  padding: 0;
-  line-height: 28px;
-  font-weight: normal;
-}
-#gallery-topics-selection .gl_topics {
-  border-bottom: 1px solid #dfdfdf;
-  max-height: 298px;
-  overflow-y: scroll;
-}
-#gallery-topics-selection .topic {
-  margin-bottom: 24px;
-}
-#gallery-topics-selection .topic_name {
-  font-size: 15px;
-  color: #333;
-  margin: 0;
-  line-height: inherit;
-}
-#gallery-topics-selection .topic_meta {
-  font-size: 13px;
-  color: #999;
-}
-#gallery-topics-selection .topics_skip {
-  display: block;
-  cursor: pointer;
-  font-size: 16px;
-  color: #3377AA;
-  text-align: center;
-  margin-top: 33px;
-}
-#gallery-topics-selection .topics_skip:hover {
-  background: transparent;
-}
-#gallery-topics-selection .close_selection {
-  position: absolute;
-  width: 30px;
-  height: 20px;
-  top: 46px;
-  right: 40px;
-  background: #fff;
-  color: #999;
-  text-align: right;
-}
-#gallery-topics-selection .close_selection:hover{
-  background: #fff;
-  color: #999;
-}
-</style>
-
-
-
-        
-
-
-
-    <header class="main-hd">
-     
-
-    
-
-         
-
-    </header>
-<br>
-
-           
-</section>
-
-<!-- COLLECTED JS -->
-
-    <br/>
-
-      
-                
-             
-                
-
-
-
-
-
-
-
-
-            
-
-
-    <script type="text/javascript">
-        $(function(){if($.browser.msie && $.browser.version == 6.0){
-            var $info = $('#info'),
-                maxWidth = parseInt($info.css('max-width'));
-            if($info.width() > maxWidth) {
-                $info.width(maxWidth);
-            }
-        }});
-    </script>
-
-
-            
-            <div class="aside">
-                
-    
-
-
-
-    
-
-
-
-
-
-        </div>
-    </div>
-
-        
-  
-    </div>
-    <script type="text/javascript" src="https://img3.doubanio.com/misc/mixed_static/5ad5f6f9d9cb7630.js"></script>
-        
-        
-   
-    <script type="text/javascript" src="https://img3.doubanio.com/f/shire/77323ae72a612bba8b65f845491513ff3329b1bb/js/do.js" data-cfg-autoload="false"></script>
-    <script type="text/javascript" src="https://img3.doubanio.com/f/shire/4ea3216519a6183c7bcd4f7d1a6d4fd57ce1a244/js/ui/dialog.js"></script>
-    <script type="text/javascript">
-        var HTTPS_DB='https://www.douban.com';
-var account_pop={open:function(o,e){e?referrer="?referrer="+encodeURIComponent(e):referrer="?referrer="+window.location.href;var n="",i="",t=382;"reg"===o?(n="用户注册",i="https://accounts.douban.com/popup/login?source=movie#popup_register",t=480):"login"===o&&(n="用户登录",i="https://accounts.douban.com/popup/login?source=movie");var r=document.location.protocol+"//"+document.location.hostname,a=dui.Dialog({width:478,title:n,height:t,cls:"account_pop",isHideTitle:!0,modal:!0,content:"<iframe scrolling='no' frameborder='0' width='478' height='"+t+"' src='"+i+"' name='"+r+"'></iframe>"},!0),c=a.node;if(c.undelegate(),c.delegate(".dui-dialog-close","click",function(){var o=$("body");o.find("#login_msk").hide(),o.find(".account_pop").remove()}),$(window).width()<478){var u="";"reg"===o?u=HTTPS_DB+"/accounts/register"+referrer:"login"===o&&(u=HTTPS_DB+"/accounts/login"+referrer),window.location.href=u}else a.open();$(window).bind("message",function(o){"https://accounts.douban.com"===o.originalEvent.origin&&(c.find("iframe").css("height",o.originalEvent.data),c.height(o.originalEvent.data),a.update())})}};Douban&&Douban.init_show_login&&(Douban.init_show_login=function(o){var e=$(o);e.click(function(){var o=e.data("ref")||"";return account_pop.open("login",o),!1})}),Do(function(){$("body").delegate(".pop_register","click",function(o){o.preventDefault();var e=$(this).data("ref")||"";return account_pop.open("reg",e),!1}),$("body").delegate(".pop_login","click",function(o){o.preventDefault();var e=$(this).data("ref")||"";return account_pop.open("login",e),!1})});
-    </script>
-
-    
-    
-    
-    
-
-
-
-
-    
-<script type="text/javascript">
-    (function (global) {
-        var newNode = global.document.createElement('script'),
-            existingNode = global.document.getElementsByTagName('script')[0],
-            adSource = '//erebor.douban.com/',
-            userId = '',
-            browserId = 'LOLLUpFZ2GE',
-            criteria = '7:史蒂文·元|7:村上春树|7:玉子妍|7:崔承浩|7:李沧东|7:韩国电影|7:金秀京|7:电影|7:韩国|7:2018|7:戛纳电影节|7:悬疑|7:剧情|7:刘亚仁|7:全钟瑞|3:/subject/26842702/?tag=%E7%83%AD%E9%97%A8&amp;from=gaia',
-            preview = '',
-            debug = false,
-            adSlots = ['dale_movie_subject_top_icon', 'dale_movie_subject_top_right', 'dale_movie_subject_top_middle', 'dale_movie_subject_inner_middle', 'dale_movie_subject_download_middle'];
-
-        global.DoubanAdRequest = {src: adSource, uid: userId, bid: browserId, crtr: criteria, prv: preview, debug: debug};
-        global.DoubanAdSlots = (global.DoubanAdSlots || []).concat(adSlots);
-
-        newNode.setAttribute('type', 'text/javascript');
-        newNode.setAttribute('src', 'https://img3.doubanio.com/f/adjs/cdc904d1376a43e44bbf399a0aff51973016cd77/ad.release.js');
-        newNode.setAttribute('async', true);
-        existingNode.parentNode.insertBefore(newNode, existingNode);
-    })(this);
-</script>
-
-
-<script type="text/javascript">
-var _paq = _paq || [];
-_paq.push(['trackPageView']);
-_paq.push(['enableLinkTracking']);
-(function() {
-    var p=(('https:' == document.location.protocol) ? 'https' : 'http'), u=p+'://fundin.douban.com/';
-    _paq.push(['setTrackerUrl', u+'piwik']);
-    _paq.push(['setSiteId', '100001']);
-    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-    g.type='text/javascript';
-    g.defer=true;
-    g.async=true;
-    g.src=p+'://img3.doubanio.com/dae/fundin/piwik.js';
-    s.parentNode.insertBefore(g,s);
-})();
-</script>
-
-<script type="text/javascript">
-var setMethodWithNs = function(namespace) {
-  var ns = namespace ? namespace + '.' : ''
-    , fn = function(string) {
-        if(!ns) {return string}
-        return ns + string
-      }
-  return fn
-}
-
-var gaWithNamespace = function(fn, namespace) {
-  var method = setMethodWithNs(namespace)
-  fn.call(this, method)
-}
-
-var _gaq = _gaq || []
-  , accounts = [
-      { id: 'UA-7019765-1', namespace: 'douban' }
-    , { id: 'UA-7019765-19', namespace: '' }
-    ]
-  , gaInit = function(account) {
-      gaWithNamespace(function(method) {
-        gaInitFn.call(this, method, account)
-      }, account.namespace)
-    }
-  , gaInitFn = function(method, account) {
-      _gaq.push([method('_setAccount'), account.id]);
-      _gaq.push([method('_setSampleRate'), '5']);
-
-      
-  _gaq.push([method('_addOrganic'), 'google', 'q'])
-  _gaq.push([method('_addOrganic'), 'baidu', 'wd'])
-  _gaq.push([method('_addOrganic'), 'soso', 'w'])
-  _gaq.push([method('_addOrganic'), 'youdao', 'q'])
-  _gaq.push([method('_addOrganic'), 'so.360.cn', 'q'])
-  _gaq.push([method('_addOrganic'), 'sogou', 'query'])
-  if (account.namespace) {
-    _gaq.push([method('_addIgnoredOrganic'), '豆瓣'])
-    _gaq.push([method('_addIgnoredOrganic'), 'douban'])
-    _gaq.push([method('_addIgnoredOrganic'), '豆瓣网'])
-    _gaq.push([method('_addIgnoredOrganic'), 'www.douban.com'])
-  }
-
-      if (account.namespace === 'douban') {
-        _gaq.push([method('_setDomainName'), '.douban.com'])
-      }
-
-        _gaq.push([method('_setCustomVar'), 1, 'responsive_view_mode', 'desktop', 3])
-
-        _gaq.push([method('_setCustomVar'), 2, 'login_status', '0', 2]);
-
-      _gaq.push([method('_trackPageview')])
-    }
-
-for(var i = 0, l = accounts.length; i < l; i++) {
-  var account = accounts[i]
-  gaInit(account)
-}
-
-
-;(function() {
-    var ga = document.createElement('script');
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    ga.setAttribute('async', 'true');
-    document.documentElement.firstChild.appendChild(ga);
-})()
-</script>
-
 
 			</div>
 		</section>
-
 <div class="div_review" >
 <span>最近评论</span><br>
 <span id="login_review"></span>
-<button id="a_review"  onclick="publish()"><font size="4">我要写短评...</font></button><br>
+<button id="a_review"  onclick="publish()"><font size="3">我要写短评...</font></button><br>
 <hr>
 <c:forEach var="r" items="${requestScope.review}" varStatus="status">
-  		 <a href="#" rel="v:directedBy">${r.getReviewUser()}</a>&nbsp;&nbsp;
-  		 <span><font color="red">${r.getReviewScore()}</font></span>&nbsp;&nbsp;
-  		<span>${r.getReviewTime()}</span><br>
-  		 <span>${r.getReviewContent()}</span>
-  		  <hr>
+  		 <a href="#" rel="v:directedBy">${r.getReviewuser()}</a>&nbsp;&nbsp;
+  		 <span><font color="red">${r.getReviewscore()}</font></span>&nbsp;&nbsp;
+  		<span>${r.getReviewtime()}</span><br>
+  		 <span>${r.getReviewcontent()}</span>
+  		  <hr style=" height:2px;border:none;border-top:2px dotted #185598;"size=2>
   		 </c:forEach></span>
+  		 
+  		    
 </div>
-		
+ 
+	 <div id="footer">
+            <div class="footer-extra"></div>
+         <div class="col-md-12 text-center">
+		            <ul class="pagination" id="page">
+		            
+		              <li class="prev" id="prev_page"><a href="" ><i class="ion-ios-arrow-left"></i></a></li>
+		              <!--<li class="active"><a href="#">1</a></li>
+		              <li><a href="#" >2</a></li>
+		              <li><a href="movieaction_selectMovie?type=${requestScope.type}&keyword=${requestScope.keyword}&pageCode=3">3</a></li>
+		              <li><a href="#">...</a></li>
+		              <li><a href="#">97</a></li>
+		              -->
+		              
+		              <li class="next" id="next_page"><a href=""><i class="ion-ios-arrow-right"></i></a></li>
+		            </ul>
+		            
+		          </div>
+		          </div>	
+		          
 		
 	<!-- Start footer -->
 		<footer class="footer">

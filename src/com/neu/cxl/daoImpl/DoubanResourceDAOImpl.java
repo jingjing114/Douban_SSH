@@ -33,10 +33,12 @@ public class DoubanResourceDAOImpl implements DoubanResourceDAO{
 	//默认查询所有电影
 	@SuppressWarnings("unchecked")
 	@Override
-	public ArrayList<DoubanResource> selectMovie() {
+	public ArrayList<DoubanResource> selectMovie(int pageSize,int pageCode) {
 		
 		String queryString = "from DoubanResource";
 		Query queryObject = this.getCurrentSession().createQuery(queryString);
+		queryObject.setFirstResult((pageCode-1)*pageSize);
+		queryObject.setMaxResults(pageSize);
 		return (ArrayList<DoubanResource>) queryObject.list();
 	}
 	//通过ID查询电影
@@ -51,46 +53,56 @@ public class DoubanResourceDAOImpl implements DoubanResourceDAO{
 	//通过名字关键字查询电影
 	@SuppressWarnings("unchecked")
 	@Override
-	public ArrayList<DoubanResource> selectMovieByNameKeyword(DoubanResource doubanResource) {
+	public ArrayList<DoubanResource> selectMovieByNameKeyword(DoubanResource doubanResource,int pageSize,int pageCode) {
 		String queryString = "from DoubanResource m where m.moviename like ?";
 		Query queryObject = this.getCurrentSession().createQuery(queryString);
 		queryObject.setString(0, "%"+doubanResource.getMoviename()+"%");
+		queryObject.setFirstResult((pageCode-1)*pageSize);
+		queryObject.setMaxResults(pageSize);
 		return (ArrayList<DoubanResource>) queryObject.list();
 	}
 	//通过电影类型查询电影
 	@SuppressWarnings("unchecked")
 	@Override
-	public ArrayList<DoubanResource> selectMovieByType(DoubanResource doubanResource) {
+	public ArrayList<DoubanResource> selectMovieByType(DoubanResource doubanResource,int pageSize,int pageCode) {
 		String queryString = "from DoubanResource m where m.movietype like ?";
 		Query queryObject = this.getCurrentSession().createQuery(queryString);
 		queryObject.setString(0, "%"+doubanResource.getMovietype()+"%");
+		queryObject.setFirstResult((pageCode-1)*pageSize);
+		queryObject.setMaxResults(pageSize);
 		return (ArrayList<DoubanResource>) queryObject.list();
 	}
 	//通过电影年份查询电影
 	@SuppressWarnings("unchecked")
 	@Override
-	public ArrayList<DoubanResource> selectMovieByYear(DoubanResource doubanResource) {
+	public ArrayList<DoubanResource> selectMovieByYear(DoubanResource doubanResource,int pageSize,int pageCode) {
 		String queryString = "from DoubanResource m where m.movieyear like ?";
 		Query queryObject = this.getCurrentSession().createQuery(queryString);
 		queryObject.setString(0, "%"+doubanResource.getMovieyear()+"%");
+		queryObject.setFirstResult((pageCode-1)*pageSize);
+		queryObject.setMaxResults(pageSize);
 		return (ArrayList<DoubanResource>) queryObject.list();
 	}
 	//通过电影评分查询高于此评分的电影
 	@SuppressWarnings("unchecked")
 	@Override
-	public ArrayList<DoubanResource> selectMovieByScore(DoubanResource doubanResource) {
+	public ArrayList<DoubanResource> selectMovieByScore(DoubanResource doubanResource,int pageSize,int pageCode) {
 		String queryString = "from DoubanResource m where m.avgscore > ?";
 		Query queryObject = this.getCurrentSession().createQuery(queryString);
 		queryObject.setString(0, doubanResource.getAvgscore());
+		queryObject.setFirstResult((pageCode-1)*pageSize);
+		queryObject.setMaxResults(pageSize);
 		return (ArrayList<DoubanResource>) queryObject.list();
 	}
 	//通过演员查询电影
 	@SuppressWarnings("unchecked")
 	@Override
-	public ArrayList<DoubanResource> selectMovieByActor(DoubanResource doubanResource) {
+	public ArrayList<DoubanResource> selectMovieByActor(DoubanResource doubanResource,int pageSize,int pageCode) {
 		String queryString = "from DoubanResource m where m.movieactorid like ?";
 		Query queryObject = this.getCurrentSession().createQuery(queryString);
 		queryObject.setString(0, "%"+doubanResource.getMovieactorid()+"%");
+		queryObject.setFirstResult((pageCode-1)*pageSize);
+		queryObject.setMaxResults(pageSize);
 		return (ArrayList<DoubanResource>) queryObject.list();
 	}
 	//高分推荐

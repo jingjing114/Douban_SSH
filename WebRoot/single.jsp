@@ -8,6 +8,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <c:if test="${sessionScope.user==null}">
 <c:redirect url="login.jsp"></c:redirect>
 </c:if>
+ 
+<c:if test="${reviewInfo==null}">
+<c:redirect url="reviewaction_selectReview?user.username=${sessionScope.user.getUsername()}"></c:redirect>
+</c:if>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -41,6 +45,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   .div_img img{width:100%;height:100%}
   #div_assis{width:100px;height:100px}
 </style>
+<script src="script/jquery.js"></script>
 <script>
 function publish()
   {
@@ -52,6 +57,8 @@ function publish()
   window.open("uploadIcon.jsp",'用户头像','height=300,width=520,top=400,left=800,toolbar=no,menubar=no,scrollbars=no,resizable=no,location=no,status=no');
 
   }
+  
+  
 </script>
 	<body>
 		<header class="primary">
@@ -68,14 +75,15 @@ function publish()
 						<div class="col-md-6 col-sm-12">
 							
 								
-								<form class="search" autocomplete="off" action="SelectMovieServletByUser">
+								<form class="search" autocomplete="off" action="movieaction_selectMovie">
 							
 								<div class="form-group">
 									<div class="input-group">
 										<input type="text" name="keyword" class="form-control" placeholder="输入电影">									
 										<div class="input-group-btn">
-											<button  class="btn btn-primary" ><i class="ion-search"></i></button>
+										<button  class="btn btn-primary" ><i class="ion-search"></i></button>
 										</div>
+									
 									</div>
 								</div>
 							
@@ -95,8 +103,9 @@ function publish()
 										<li><a href="#">摩天营救</a></li>
 									</ul>-->
 								</div>
-							</form>										
+							</form>											
 						</div>
+					
 						<div class="col-md-3 col-sm-12 text-right">
 							<ul class="nav-icons">
 								<li><div class="div_img"><img class="img-circle" src="${sessionScope.user.getIcon()}" alt="头像" /></div></li>
@@ -142,21 +151,21 @@ function publish()
 							<li class="dropdown magz-dropdown"><a href="#">关于抽象
 							</a>
 								<ul class="dropdown-menu">
-									<li><a href="category.html">加入我们</a></li>
-									<li class="dropdown magz-dropdown"><a href="category.html">公司部门 <i class="ion-ios-arrow-right"></i></a>
+									<li><a href="#">加入我们</a></li>
+									<li class="dropdown magz-dropdown"><a href="#">公司部门 <i class="ion-ios-arrow-right"></i></a>
 										<ul class="dropdown-menu">
-											<li><a href="category.html">市场部</a></li>
-											<li class="dropdown magz-dropdown"><a href="category.html">事业部 <i class="ion-ios-arrow-right"></i></a>
+											<li><a href="#">市场部</a></li>
+											<li class="dropdown magz-dropdown"><a href="#">事业部 <i class="ion-ios-arrow-right"></i></a>
 												<ul class="dropdown-menu">
-													<li><a href="category.html">抽象影业</a></li>
-													<li><a href="category.html">抽象传媒</a></li>
-													<li><a href="category.html">抽象娱乐</a></li>
+													<li><a href="#">抽象影业</a></li>
+													<li><a href="#">抽象传媒</a></li>
+													<li><a href="#">抽象娱乐</a></li>
 												</ul>
 											</li>
-											<li><a href="category.html">财务部</a>
+											<li><a href="#">财务部</a>
 										</ul>
 									</li>
-									<li><a href="category.html">抽象周报</a></li>
+									<li><a href="#">抽象周报</a></li>
 									
 								</ul>
 							</li>
@@ -181,55 +190,55 @@ function publish()
 											<div class="col-md-9">
 												<div class="row">
 													<div class="col-md-12">
-														<h2 class="megamenu-title">热门电影</h2>
+													<h2 class="megamenu-title">热门电影</h2>
 													</div>
 												</div>
 												<div class="row">
 													<article class="article col-md-4 mini">
 														<div class="inner">
 															<figure>
-																<a href="single.html">
-																	<img src="images/yao.jpg" alt="Sample Article">
+																<a href="#">
+																	<img src="images/yao.jpg" alt="Sample Article" width="252" height="180">
 																</a>
 															</figure>
 															<div class="padding">
 																<div class="detail">
 																	<div class="time">December 10, 2018</div>
-																	<div class="category"><a href="category.html">了解详情</a></div>
+																	<div class="category"><a href="movieaction_movieInfo?resource.movieid=241">了解详情</a></div>
 																</div>
-																<h2><a href="single.html">我不是药神</a></h2>
+																<h2><a href="#">我不是药神</a></h2>
 															</div>
 														</div>
 													</article>
 													<article class="article col-md-4 mini">
 														<div class="inner">
 															<figure>
-																<a href="single.html">
-																	<img src="images/ran.jpg" alt="Sample Article">
+																<a href="#">
+																	<img src="images/巨齿鲨.jpg" alt="Sample Article" width="252" height="180">
 																</a>
 															</figure>
 															<div class="padding">
 																<div class="detail">
-																	<div class="time">December 11, 1996</div>
-																	<div class="category"><a href="category.html">了解详情</a></div>
+																	<div class="time">August 10, 2018</div>
+																	<div class="category"><a href="movieaction_movieInfo?resource.movieid=4028ab7e65371c830165371d628b0000">了解详情</a></div>
 																</div>
-																<h2><a href="moviepage.html">燃烧烈爱</a></h2>
+																<h2><a href="#">巨齿鲨</a></h2>
 															</div>
 														</div>
 													</article>
 													<article class="article col-md-4 mini">
 														<div class="inner">
 															<figure>
-																<a href="single.html">
-																	<img src="images/yourname.jpg" alt="Sample Article"ur>
+																<a href="#">
+																	<img src="images/yourname.jpg" alt="Sample Article" width="252" height="180">
 																</a>
 															</figure>
 															<div class="padding">
 																<div class="detail">
 																	<div class="time">June 14, 2016</div>
-																	<div class="category"><a href="category.html">了解详情</a></div>
+																	<div class="category"><a href="movieaction_movieInfo?resource.movieid=14">了解详情</a></div>
 																</div>
-																<h2><a href="single.html">你的名字</a></h2>
+																<h2><a href="#">你的名字</a></h2>
 															</div>
 														</div>
 													</article>
@@ -260,7 +269,7 @@ function publish()
 		<section class="single">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-4 sidebar" id="sidebar">
+					<div class="col-md-4 sidebar" id="sidebar" style="overflow:hidden;word-break: break-all;word-wrap: break-word;'">
 						<aside>
 							<div class="aside-body">
 							
@@ -269,20 +278,21 @@ function publish()
 						<aside>
 							<h1 class="aside-title">最近影评</h1>
 							 <div class="aside-body">
-							 
+						 
 		<c:forEach var="r" items="${requestScope.reviewInfo}" varStatus="status">
   		 <a href="#" rel="v:directedBy">${r.getReviewuser()}</a>&nbsp;&nbsp;
   		 <span><font color="red">${r.getReviewscore()}</font></span>&nbsp;&nbsp;
   		 <span><font color="red">${r.getReviewmoviename()}</font></span>&nbsp;&nbsp;
   		<span><font>${r.getReviewtime()}</font></span><br>
-  		 <span>${r.getReviewcontent()}</span>
-  		  <hr>
+  		 <span>${r.getReviewcontent()}</span><br>
+  		 <a href="reviewaction_deleteReview?review.reviewid=${r.getReviewid()}" >删除</a>
+  		<!--  <a id="delete_a" href="javascript:void(0);" onclick="deletereview()" >删除</a>-->
+  		  <hr style=" height:2px;border:none;border-top:2px dotted #185598;"size=2>
   		 </c:forEach></span>
-  		 <a href="#">查看所有评论</a>
+  		 
+  		
 								<div class="line"></div>
-								
-								
-							
+
 							</div>
 						</aside>
 						

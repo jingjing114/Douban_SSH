@@ -11,7 +11,7 @@ public class DoubanDirectortomovie  implements java.io.Serializable {
 
     // Fields    
 
-     private Integer correspondenceid;
+     private String correspondenceid;
      private String movieid;
      private String directorid;
 
@@ -32,11 +32,11 @@ public class DoubanDirectortomovie  implements java.io.Serializable {
    
     // Property accessors
 
-    public Integer getCorrespondenceid() {
+    public String getCorrespondenceid() {
         return this.correspondenceid;
     }
     
-    public void setCorrespondenceid(Integer correspondenceid) {
+    public void setCorrespondenceid(String correspondenceid) {
         this.correspondenceid = correspondenceid;
     }
 

@@ -48,7 +48,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</div>
 						<div class="col-md-6 col-sm-12">
 							
-									<form class="search" autocomplete="off" action="SelectMovieServletByUser">
+									<form class="search" autocomplete="off" action="movieaction_selectMovie">
 							
 								<div class="form-group">
 									<div class="input-group">
@@ -76,12 +76,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 										<li><a href="#">摩天营救</a></li>
 									</ul>-->
 								</div>
+																	
 							</form>				
 						</div>
 						<div class="col-md-3 col-sm-12 text-right">
 							<ul class="nav-icons">
-								<li><a href="register.html"><i class="ion-person-add"></i><div>注册</div></a></li>
-								<li><a href="login.html"><i class="ion-person"></i><div>登录</div></a></li>
+								<li><a href="register.jsp"><i class="ion-person-add"></i><div>注册</div></a></li>
+								<li><a href="login.jsp"><i class="ion-person"></i><div>登录</div></a></li>
 							</ul>
 						</div>
 					</div>

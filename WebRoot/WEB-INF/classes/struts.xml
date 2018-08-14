@@ -13,6 +13,7 @@
 <result name="main">/in_index.jsp</result>
 <result name="login">/login.jsp</result>
 <result name="single">/single.jsp</result>
+<result name="admin">/JSP/manager.jsp</result>
 </action>
 
 <action name="upload" class="com.neu.cxl.web.fileUploadAction" method="upload">
@@ -33,6 +34,29 @@
 
 <action name="reviewaction_*" class="com.neu.cxl.web.ReviewAction" method="{1}">
 <result name="selectreviewuser">/single.jsp</result>
+</action>
+
+<action name="aadaction_*" class="com.neu.cxl.web.ActorAndDirectorAction" method="{1}">
+<result name="actorinfo">/actor.jsp</result>
+<result name="directorinfo">/director.jsp</result>
+</action>
+
+<action name="adminaction_*" class="com.neu.cxl.web.AdminAction" method="{1}">
+
+<result name="input">/JSP/movieUpdate.jsp</result><!-- 发生错误或拦截时默认返回input对应的视图 -->
+<interceptor-ref name="defaultStack">
+<param name="fileUpload.maximumsize">4194304</param>
+<param name="fileUpload.allowedExtensions">.bmp,.gif,.jpg,.png</param>
+<param name="fileUpload.allowedTypes">application/x-MS-bmp,image/gif,image/jpeg,image/png</param>
+</interceptor-ref>
+<result name="admin">/JSP/manager.jsp</result>
+<result name="usermanage">/JSP/userManage.jsp</result>
+<result name="success">/JSP/userReview.jsp</result>
+<result name="userreview" type="chain">adminaction_selectReview</result>
+<result name="selectmovie">/JSP/movieSelect.jsp</result>
+<result name="selectactor">/JSP/actorSelect.jsp</result>
+<result name="selectdirector">/JSP/directorSelect.jsp</result>
+<result name="selecttype">/JSP/typeSelect.jsp</result>
 </action>
 </package>
 </struts>    

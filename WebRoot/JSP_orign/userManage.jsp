@@ -1,5 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@taglib prefix="s" uri="/struts-tags"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -10,7 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'register.jsp' starting page</title>
+    <title>My JSP 'userManager.jsp' starting page</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -24,13 +24,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-   ${requestScope.msg}
-   <h3>用户注册</h3>
-   <form action="useraction_register" method="post">
-    用户名：<input type="text" name="user.username"><font color="red"><s:fielderror fieldName="user.username"></s:fielderror></font><br>
-   密码：<input type="text" name="user.password"><font color="red"><s:fielderror fieldName="user.password"></s:fielderror></font><br>
-   <input type="submit" value="提交">&nbsp;<input type="reset" value="重置">
-   </form>
-   
+  <center>
+   <h3> 用户列表：</h3><br>
+    <c:forEach var="user" items="${requestScope.userlist}">
+             用户名：<a href="adminaction_selectReview?user.username=${user.getUsername()}">${user.getUsername()}</a> &nbsp;&nbsp;
+	   性别：${user.getSex()}<br>
+    </c:forEach>
+	 </center>
+    
+    
+    
   </body>
 </html>

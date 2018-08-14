@@ -13,5 +13,5 @@ public interface DoubanReviewDAO {
 	public int deleteReview(DoubanReview review);
 	public int publishReview(DoubanReview review) ;
 	public int addReviewGoodCount(DoubanReview review) ;
-	public ArrayList<DoubanReview> selectReview(DoubanResource resource) ;
+	public ArrayList<DoubanReview> selectReview(DoubanResource resource,int pageSize,int pageCode) ;
 }

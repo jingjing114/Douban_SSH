@@ -56,8 +56,8 @@ public class DoubanReviewServiceImpl implements DoubanReviewService{
 	}
 
 	@Override
-	public ArrayList<DoubanReview> selectReview(DoubanResource resource) {
-		return this.doubanReviewDAO.selectReview(resource);
+	public ArrayList<DoubanReview> selectReview(DoubanResource resource,int pageSize,int pageCode) {
+		return this.doubanReviewDAO.selectReview(resource,pageSize,pageCode);
 	}
 
 }

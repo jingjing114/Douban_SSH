@@ -171,8 +171,16 @@ public class UserAction extends ActionSupport{
 	{
 		if(this.doubanUserService.findDoubanUser(user)!=null)
 		{
-			ServletActionContext.getRequest().getSession().setAttribute("user", user);
-			return "main";
+			ServletActionContext.getRequest().getSession().setAttribute("user", this.doubanUserService.findDoubanUser(user));
+			//System.out.println(this.doubanUserService.findDoubanUser(user).getUsername());
+			if("管理员".equals(this.doubanUserService.findDoubanUser(user).getRole()))
+			{
+				return "admin";
+			}
+			else
+				{
+				return "main";
+				}
 		}
 		else
 		{
@@ -209,7 +217,7 @@ public class UserAction extends ActionSupport{
 		return "single";
 	}
 //修改个人资料
-	public String updateDoubanUserInfo() throws IOException
+	public void updateDoubanUserInfo() throws IOException
 	{
 		HttpServletResponse response = ServletActionContext.getResponse();
 		HttpServletRequest request = ServletActionContext.getRequest();
@@ -224,7 +232,7 @@ public class UserAction extends ActionSupport{
 				response.getWriter().write("<script languge='javascript'>alert('修改失败'); ;</script>");
 			}
 		
-		return "single";
+		
 	}
 //修改密码
 	public void updatePassword() throws IOException

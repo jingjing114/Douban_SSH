@@ -71,12 +71,12 @@ public class DoubanReviewDAOImpl implements DoubanReviewDAO{
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public ArrayList<DoubanReview> selectReview(DoubanResource resource) {
-		String queryString = "from DoubanReview r where r.movieid=? order by reviewtime desc";
+	public ArrayList<DoubanReview> selectReview(DoubanResource resource,int pageSize,int pageCode) {
+		String queryString = "from DoubanReview r where r.reviewmovieid=? order by reviewtime desc";
 		Query queryObject = this.getCurrentSession().createQuery(queryString);
 		queryObject.setString(0,resource.getMovieid());
-		queryObject.setFirstResult(0);
-		queryObject.setMaxResults(10);
+		queryObject.setFirstResult((pageCode-1)*pageSize);
+		queryObject.setMaxResults(pageSize);
 		return (ArrayList<DoubanReview>) queryObject.list();
 	}
 

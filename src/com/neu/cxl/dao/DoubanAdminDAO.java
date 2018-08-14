@@ -8,6 +8,7 @@ import com.neu.cxl.entity.DoubanDirector;
 import com.neu.cxl.entity.DoubanDirectortomovie;
 import com.neu.cxl.entity.DoubanResource;
 import com.neu.cxl.entity.DoubanReview;
+import com.neu.cxl.entity.DoubanType;
 import com.neu.cxl.entity.DoubanUser;
 
 
@@ -24,17 +25,21 @@ public interface DoubanAdminDAO {
 	public ArrayList<DoubanUser> findAllUser() ;
 	public ArrayList<DoubanReview> selectDoubanReview(DoubanUser user);
 	public ArrayList<DoubanResource> selectMovie() ;
+	public ArrayList<DoubanResource> selectMovieByNameKeyword(DoubanResource doubanResource) ;
 	//public ArrayList<DoubanUser> selectActor(DoubanActor actor) ;
 	//public ArrayList<DoubanUser> selectDirector(DoubanDirector director);
 	public int deleteActor(DoubanActor actor) ;
 	public int deleteDirector(DoubanDirector director);
 	public int updateActor(DoubanActor actor);
 	public int updateDirector(DoubanDirector director) ;
-	
-	public ArrayList<DoubanActor> selectActorByNameKeyword(String s) ;
-	public ArrayList<DoubanDirector> selectDirectorByNameKeyword(String s) ;
-
+	public int updateMovieActor(DoubanResource resource);
+	public ArrayList<DoubanActor> selectActorByNameKeyword(DoubanActor actor) ;
+	public ArrayList<DoubanDirector> selectDirectorByNameKeyword(DoubanDirector direactor) ;
+	public DoubanResource selectActor(DoubanResource doubanResource);
 	public ArrayList<DoubanActor> selectActor() ;
 	public ArrayList<DoubanDirector> selectDirector() ;
+	
+	public int addMovieType(DoubanType type);
+	public ArrayList<DoubanType> selectMovieType();
 
 }

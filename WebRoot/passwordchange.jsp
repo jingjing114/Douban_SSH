@@ -99,7 +99,7 @@ else
 						</div>
 						<div class="col-md-6 col-sm-12">
 							
-									<form class="search" autocomplete="off" action="SelectMovieServletByUser">
+								<form class="search" autocomplete="off" action="movieaction_selectMovie">
 							
 								<div class="form-group">
 									<div class="input-group">
@@ -127,7 +127,7 @@ else
 										<li><a href="#">摩天营救</a></li>
 									</ul>-->
 								</div>
-							</form>											
+							</form>													
 						</div>
 						<div id="div_user" >
 						

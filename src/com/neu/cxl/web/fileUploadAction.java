@@ -76,7 +76,7 @@ public class fileUploadAction extends ActionSupport{
 			response.getWriter().write("<script languge='javascript'>alert('修改成功');</script>");
 			return;
 		}
-		String path=ServletActionContext.getServletContext().getRealPath("/upload");
+		String path=ServletActionContext.getServletContext().getRealPath("/upload/userIcon");
 		File file=new File(path);
 		if(!file.exists())
 		{
@@ -85,7 +85,7 @@ public class fileUploadAction extends ActionSupport{
 		
 			FileUtils.copyFile(myfile,new File(file,this.myfileFileName));
 		
-		user.setIcon("upload/"+this.myfileFileName);
+		user.setIcon("upload/userIcon/"+this.myfileFileName);
 
 		if(this.doubanUserService.uploadIcon(user))
 		 {

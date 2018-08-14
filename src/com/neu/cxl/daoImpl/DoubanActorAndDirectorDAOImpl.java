@@ -36,7 +36,7 @@ public class DoubanActorAndDirectorDAOImpl implements DoubanActorAndDirectorDAO{
 	@SuppressWarnings("unchecked")
 	@Override
 	public ArrayList<DoubanActor> selectActorByMovieId(DoubanResource doubanResource) {
-		String queryString = "from DoubanActor a where a.actorid in (select atm.actorid from DoubanActortomovie atm where atm.movieid=?";
+		String queryString = "from DoubanActor a where a.actorid in (select atm.actorid from DoubanActortomovie atm where atm.movieid=?)";
 		Query queryObject = this.getCurrentSession().createQuery(queryString);
 		queryObject.setString(0, doubanResource.getMovieid());
 		return (ArrayList<DoubanActor>) queryObject.list();
@@ -45,7 +45,7 @@ public class DoubanActorAndDirectorDAOImpl implements DoubanActorAndDirectorDAO{
 	@SuppressWarnings("unchecked")
 	@Override
 	public ArrayList<DoubanDirector> selectDirectorByMovieId(DoubanResource doubanResource) {
-		String queryString = "from DoubanDirector d where d.directorid in (select dtm.directorid from DoubanDirectortomovie dtm where dtm.movieid=?";
+		String queryString = "from DoubanDirector d where d.directorid in (select dtm.directorid from DoubanDirectortomovie dtm where dtm.movieid=?)";
 		Query queryObject = this.getCurrentSession().createQuery(queryString);
 		queryObject.setString(0, doubanResource.getMovieid());
 		return (ArrayList<DoubanDirector>) queryObject.list();
@@ -54,7 +54,7 @@ public class DoubanActorAndDirectorDAOImpl implements DoubanActorAndDirectorDAO{
 	@SuppressWarnings("unchecked")
 	@Override
 	public ArrayList<DoubanResource> selectMovieByActorId(DoubanActor doubanActor) {
-		String queryString = "from DoubanResource m where m.movieid in (select atm.movieid from DoubanActortomovie atm where atm.actorid=?";
+		String queryString = "from DoubanResource m where m.movieid in (select atm.movieid from DoubanActortomovie atm where atm.actorid=?)";
 		Query queryObject = this.getCurrentSession().createQuery(queryString);
 		queryObject.setString(0, doubanActor.getActorid());
 		return  (ArrayList<DoubanResource>) queryObject.list();
@@ -63,7 +63,7 @@ public class DoubanActorAndDirectorDAOImpl implements DoubanActorAndDirectorDAO{
 	@SuppressWarnings("unchecked")
 	@Override
 	public ArrayList<DoubanResource> selectMovieByDirectorId(DoubanDirector doubanDirector) {
-		String queryString = "from DoubanResource m where m.movieid in (select dtm.movieid from DoubanDirectortomovie dtm where dtm.directorid=?";
+		String queryString = "from DoubanResource m where m.movieid in (select dtm.movieid from DoubanDirectortomovie dtm where dtm.directorid=?)";
 		Query queryObject = this.getCurrentSession().createQuery(queryString);
 		queryObject.setString(0, doubanDirector.getDirectorid());
 		return  (ArrayList<DoubanResource>) queryObject.list();
@@ -81,7 +81,7 @@ public class DoubanActorAndDirectorDAOImpl implements DoubanActorAndDirectorDAO{
 	@Override
 	public DoubanDirector selectDirectorById(DoubanDirector doubanDirector) {
 		Criteria criteria=this.getCurrentSession().createCriteria(DoubanDirector.class);
-		Criterion criterion=Restrictions.eq("actorid",doubanDirector.getDirectorid());
+		Criterion criterion=Restrictions.eq("directorid",doubanDirector.getDirectorid());
 		criteria.add(criterion);
 		
 		return (DoubanDirector) criteria.uniqueResult();

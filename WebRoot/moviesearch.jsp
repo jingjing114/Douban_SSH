@@ -39,15 +39,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 .div_img{width:60px;height:60px;border-radius:100px; overflow:hidden}
   .div_img img{width:100%;height:100%}
 </style>
+<script src="js/jquery.js"></script>
 <script>
 function show(){
 
 var session="<%=session.getAttribute("user")%>"
+var movie="<%=request.getAttribute("movielist")%>";
 //alert(session)
 if(session=="null")
 {
 	document.getElementById("div_user").innerHTML="<div  class='col-md-3 col-sm-12 text-right'><ul class='nav-icons'><li><a href='register.jsp'><i class='ion-person-add'></i> <div> 注册</div></a></li><li><a href='login.jsp'><i class='ion-person'></i><div>登录</div></a></li></ul></div>"
-	document.getElementById("li_user").style.display="none"
+	
 	
 }
 else
@@ -55,7 +57,31 @@ else
 	document.getElementById("div_user").innerHTML="<div  class='col-md-3 col-sm-12 text-right'><ul class='nav-icons'><li><div class='div_img'><img class='img-circle' src='${sessionScope.user.getIcon()}'  /></div></li><li><a href='reviewaction_selectReview?user.username=${sessionScope.user.getUsername()}'><span>${sessionScope.user.getUsername()}</span></a></li></ul></div>"
 }
 
+if(movie=="null")
+{
+	document.getElementById("next_page").style.display="none"
 }
+
+}
+
+$(function prev(){
+	var pagecode=<%=request.getAttribute("pageCode")%>;
+	if(pagecode<=2)
+	{
+		pagecode=2;
+	}
+	$('#prev_page').on('click', 'a', function (e){
+    var url="movieaction_selectMovie?type=${requestScope.type}&keyword=${requestScope.keyword}&pageCode="+(pagecode-1);
+    
+    $(e.target).attr("href",url);})
+});
+
+$(function next(){
+	var pagecode=<%=request.getAttribute("pageCode")%>;
+	$('#next_page').on('click', 'a', function (e){
+    var url="movieaction_selectMovie?type=${requestScope.type}&keyword=${requestScope.keyword}&pageCode="+(pagecode+1);
+    $(e.target).attr("href",url);})
+});
 </script>
 	<body onload="show()">
 			<div class="firstbar">
@@ -169,16 +195,16 @@ else
    
         
         <div class="tag-list">
-         <a href="movieaction_selectMovieByType?type=爱情" > <label class="select"><input type="button" name="tag" value="爱情"> </label></a>
-         <a href="movieaction_selectMovieByType?type=惊悚" >	<label class="select"><input type="button" name="tag" value="惊悚"> </label></a>
-         <a href="movieaction_selectMovieByType?type=动作" >	<label class="select"><input type="button" name="tag" value="动作"> </label></a>
-         <a href="movieaction_selectMovieByType?type=灾难" >	<label class="select"><input type="button" name="tag" value="灾难"> </label></a>
-         <a href="movieaction_selectMovieByType?type=历史" >	<label class="select"><input type="button" name="tag" value="历史"> </label></a>
-         <a href="movieaction_selectMovieByType?type=战争" >	<label class="select"><input type="button" name="tag" value="战争"> </label></a>
-         <a href="movieaction_selectMovieByType?type=喜剧" >	<label class="select"><input type="button" name="tag" value="喜剧"> </label></a>
-         <a href="movieaction_selectMovieByType?type=犯罪" >	<label class="select"><input type="button" name="tag" value="犯罪"> </label></a>
-         <a href="movieaction_selectMovieByType?type=科幻" >	<label class="select"><input type="button" name="tag" value="科幻"> </label></a>
-         <a href="movieaction_selectMovieByType?type=悬疑" >    <label class="select"><input type="button" name="tag" value="悬疑"> </label></a>
+         <a href="movieaction_selectMovie?type=爱情&keyword=1" > <label class="select"><input type="button" name="tag" value="爱情"> </label></a>
+         <a href="movieaction_selectMovie?type=惊悚&keyword=1" >	<label class="select"><input type="button" name="tag" value="惊悚"> </label></a>
+         <a href="movieaction_selectMovie?type=动作&keyword=1" >	<label class="select"><input type="button" name="tag" value="动作"> </label></a>
+         <a href="movieaction_selectMovie?type=灾难&keyword=1" >	<label class="select"><input type="button" name="tag" value="灾难"> </label></a>
+         <a href="movieaction_selectMovie?type=历史&keyword=1" >	<label class="select"><input type="button" name="tag" value="历史"> </label></a>
+         <a href="movieaction_selectMovie?type=战争&keyword=1" >	<label class="select"><input type="button" name="tag" value="战争"> </label></a>
+         <a href="movieaction_selectMovie?type=喜剧&keyword=1" >	<label class="select"><input type="button" name="tag" value="喜剧"> </label></a>
+         <a href="movieaction_selectMovie?type=犯罪&keyword=1" >	<label class="select"><input type="button" name="tag" value="犯罪"> </label></a>
+         <a href="movieaction_selectMovie?type=科幻&keyword=1" >	<label class="select"><input type="button" name="tag" value="科幻"> </label></a>
+         <a href="movieaction_selectMovie?type=悬疑&keyword=1" >    <label class="select"><input type="button" name="tag" value="悬疑"> </label></a>
         </div>
         	
         
@@ -211,17 +237,21 @@ else
      </div>
      </div>
      </div>
+     <h4><span><font color="red">${requestScope.msg}</font></span></h4>
       <div id="footer">
             <div class="footer-extra"></div>
          <div class="col-md-12 text-center">
-		            <ul class="pagination">
-		              <li class="prev"><a href="#"><i class="ion-ios-arrow-left"></i></a></li>
-		              <li class="active"><a href="#">1</a></li>
-		              <li><a href="#">2</a></li>
-		              <li><a href="#">3</a></li>
+		            <ul class="pagination" id="page">
+		            
+		              <li class="prev" id="prev_page"><a href="" ><i class="ion-ios-arrow-left"></i></a></li>
+		              <!--<li class="active"><a href="#">1</a></li>
+		              <li><a href="#" >2</a></li>
+		              <li><a href="movieaction_selectMovie?type=${requestScope.type}&keyword=${requestScope.keyword}&pageCode=3">3</a></li>
 		              <li><a href="#">...</a></li>
 		              <li><a href="#">97</a></li>
-		              <li class="next"><a href="#"><i class="ion-ios-arrow-right"></i></a></li>
+		              -->
+		              
+		              <li class="next" id="next_page"><a href=""><i class="ion-ios-arrow-right"></i></a></li>
 		            </ul>
 		            
 		          </div>

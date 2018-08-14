@@ -8,13 +8,13 @@ import com.neu.cxl.entity.DoubanResource;
 
 
 public interface DoubanResourceDAO {
-	public ArrayList<DoubanResource> selectMovie();
+	public ArrayList<DoubanResource> selectMovie(int pageSize,int pageCode);
 	public DoubanResource 			 selectMovieById(DoubanResource doubanResource) ;
-	public ArrayList<DoubanResource> selectMovieByNameKeyword(DoubanResource doubanResource) ;
-	public ArrayList<DoubanResource> selectMovieByType(DoubanResource doubanResource) ;
-	public ArrayList<DoubanResource> selectMovieByYear(DoubanResource doubanResource) ;
-	public ArrayList<DoubanResource> selectMovieByScore(DoubanResource doubanResource);
-	public ArrayList<DoubanResource> selectMovieByActor(DoubanResource doubanResource) ;
+	public ArrayList<DoubanResource> selectMovieByNameKeyword(DoubanResource doubanResource,int pageSize,int pageCode) ;
+	public ArrayList<DoubanResource> selectMovieByType(DoubanResource doubanResource,int pageSize,int pageCode) ;
+	public ArrayList<DoubanResource> selectMovieByYear(DoubanResource doubanResource,int pageSize,int pageCode) ;
+	public ArrayList<DoubanResource> selectMovieByScore(DoubanResource doubanResource,int pageSize,int pageCode);
+	public ArrayList<DoubanResource> selectMovieByActor(DoubanResource doubanResource,int pageSize,int pageCode) ;
 	
 	/*public ArrayList<DoubanResource> sortMovieByScore(ResultSort resultsort) ;
 	public ArrayList<DoubanResource> sortMovieByYear(ResultSort resultsort) ;

@@ -17,8 +17,8 @@ public class DoubanResourceServiceImpl implements DoubanResourceService{
 	private DoubanResourceDAO doubanResourceDAO;
 	
 	@Override
-	public ArrayList<DoubanResource> selectMovie() {
-		return this.doubanResourceDAO.selectMovie();
+	public ArrayList<DoubanResource> selectMovie(int pageSize,int pageCode) {
+		return this.doubanResourceDAO.selectMovie( pageSize, pageCode);
 	}
 
 	@Override
@@ -27,28 +27,28 @@ public class DoubanResourceServiceImpl implements DoubanResourceService{
 	}
 
 	@Override
-	public ArrayList<DoubanResource> selectMovieByNameKeyword(DoubanResource doubanResource) {
-		return this.doubanResourceDAO.selectMovieByNameKeyword(doubanResource);
+	public ArrayList<DoubanResource> selectMovieByNameKeyword(DoubanResource doubanResource,int pageSize,int pageCode) {
+		return this.doubanResourceDAO.selectMovieByNameKeyword(doubanResource,pageSize,pageCode);
 	}
 
 	@Override
-	public ArrayList<DoubanResource> selectMovieByType(DoubanResource doubanResource) {
-		return this.doubanResourceDAO.selectMovieByType(doubanResource);
+	public ArrayList<DoubanResource> selectMovieByType(DoubanResource doubanResource,int pageSize,int pageCode) {
+		return this.doubanResourceDAO.selectMovieByType(doubanResource,pageSize,pageCode);
 	}
 
 	@Override
-	public ArrayList<DoubanResource> selectMovieByYear(DoubanResource doubanResource) {
-		return this.doubanResourceDAO.selectMovieByYear(doubanResource);
+	public ArrayList<DoubanResource> selectMovieByYear(DoubanResource doubanResource,int pageSize,int pageCode) {
+		return this.doubanResourceDAO.selectMovieByYear(doubanResource,pageSize,pageCode);
 	}
 
 	@Override
-	public ArrayList<DoubanResource> selectMovieByScore(DoubanResource doubanResource) {
-		return this.doubanResourceDAO.selectMovieByScore(doubanResource);
+	public ArrayList<DoubanResource> selectMovieByScore(DoubanResource doubanResource,int pageSize,int pageCode) {
+		return this.doubanResourceDAO.selectMovieByScore(doubanResource,pageSize,pageCode);
 	}
 
 	@Override
-	public ArrayList<DoubanResource> selectMovieByActor(DoubanResource doubanResource) {
-		return this .doubanResourceDAO.selectMovieByActor(doubanResource);
+	public ArrayList<DoubanResource> selectMovieByActor(DoubanResource doubanResource,int pageSize,int pageCode) {
+		return this .doubanResourceDAO.selectMovieByActor(doubanResource,pageSize,pageCode);
 	}
 
 	@Override

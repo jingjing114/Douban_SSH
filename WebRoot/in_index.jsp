@@ -139,8 +139,8 @@ else
 					<div id="menu-list">
 						<ul class="nav-list">
 							<li class="for-tablet nav-title"><a>Menu</a></li>
-							<li class="for-tablet"><a href="login.html">Login</a></li>
-							<li class="for-tablet"><a href="register.html">Register</a></li>
+							<li class="for-tablet"><a href="login.jsp">Login</a></li>
+							<li class="for-tablet"><a href="register.jsp">Register</a></li>
 							
 							<li class="dropdown magz-dropdown">
 								<a href="in_index.jsp">主页 </a>
@@ -157,21 +157,21 @@ else
 							<li class="dropdown magz-dropdown"><a href="#">关于抽象
 							</a>
 								<ul class="dropdown-menu">
-									<li><a href="category.html">加入我们</a></li>
-									<li class="dropdown magz-dropdown"><a href="category.html">公司部门 <i class="ion-ios-arrow-right"></i></a>
+									<li><a href="#">加入我们</a></li>
+									<li class="dropdown magz-dropdown"><a href="#">公司部门 <i class="ion-ios-arrow-right"></i></a>
 										<ul class="dropdown-menu">
-											<li><a href="category.html">市场部</a></li>
-											<li class="dropdown magz-dropdown"><a href="category.html">事业部 <i class="ion-ios-arrow-right"></i></a>
+											<li><a href="#">市场部</a></li>
+											<li class="dropdown magz-dropdown"><a href="#">事业部 <i class="ion-ios-arrow-right"></i></a>
 												<ul class="dropdown-menu">
-													<li><a href="category.html">抽象影业</a></li>
-													<li><a href="category.html">抽象传媒</a></li>
-													<li><a href="category.html">抽象娱乐</a></li>
+													<li><a href="#">抽象影业</a></li>
+													<li><a href="#">抽象传媒</a></li>
+													<li><a href="#">抽象娱乐</a></li>
 												</ul>
 											</li>
-											<li><a href="category.html">财务部</a>
+											<li><a href="#">财务部</a>
 										</ul>
 									</li>
-									<li><a href="category.html">抽象周报</a></li>
+									<li><a href="#">抽象周报</a></li>
 									
 								</ul>
 							</li>
@@ -203,48 +203,48 @@ else
 													<article class="article col-md-4 mini">
 														<div class="inner">
 															<figure>
-																<a href="single.html">
-																	<img src="images/yao.jpg" alt="Sample Article">
+																<a href="#">
+																	<img src="images/yao.jpg" alt="Sample Article" width="252" height="180">
 																</a>
 															</figure>
 															<div class="padding">
 																<div class="detail">
 																	<div class="time">December 10, 2018</div>
-																	<div class="category"><a href="category.html">了解详情</a></div>
+																	<div class="category"><a href="movieaction_movieInfo?resource.movieid=241">了解详情</a></div>
 																</div>
-																<h2><a href="single.html">我不是药神</a></h2>
+																<h2><a href="#">我不是药神</a></h2>
 															</div>
 														</div>
 													</article>
 													<article class="article col-md-4 mini">
 														<div class="inner">
 															<figure>
-																<a href="single.html">
-																	<img src="images/ran.jpg" alt="Sample Article">
+																<a href="#">
+																	<img src="images/巨齿鲨.jpg" alt="Sample Article" width="252" height="180">
 																</a>
 															</figure>
 															<div class="padding">
 																<div class="detail">
-																	<div class="time">December 11, 1996</div>
-																	<div class="category"><a href="category.html">了解详情</a></div>
+																	<div class="time">August 10, 2018</div>
+																	<div class="category"><a href="movieaction_movieInfo?resource.movieid=4028ab7e65371c830165371d628b0000">了解详情</a></div>
 																</div>
-																<h2><a href="moviepage.html">燃烧烈爱</a></h2>
+																<h2><a href="#">巨齿鲨</a></h2>
 															</div>
 														</div>
 													</article>
 													<article class="article col-md-4 mini">
 														<div class="inner">
 															<figure>
-																<a href="single.html">
-																	<img src="images/yourname.jpg" alt="Sample Article"ur>
+																<a href="#">
+																	<img src="images/yourname.jpg" alt="Sample Article" width="252" height="180">
 																</a>
 															</figure>
 															<div class="padding">
 																<div class="detail">
 																	<div class="time">June 14, 2016</div>
-																	<div class="category"><a href="category.html">了解详情</a></div>
+																	<div class="category"><a href="movieaction_movieInfo?resource.movieid=14">了解详情</a></div>
 																</div>
-																<h2><a href="single.html">你的名字</a></h2>
+																<h2><a href="#">你的名字</a></h2>
 															</div>
 														</div>
 													</article>
@@ -367,7 +367,7 @@ else
 									<ol class="tags-list">
 									<c:forEach var="m" items="${requestScope.movielist}" varStatus="status">
   		 
-  		 						<li><a href="movieaction_movieInfo?resource.movieid=${movie.getMovieid()}">${m.getMoviename()}</a></li>
+  		 						<li><a href="movieaction_movieInfo?resource.movieid=${m.getMovieid()}">${m.getMoviename()}</a></li>
 
   								 </c:forEach>
 										

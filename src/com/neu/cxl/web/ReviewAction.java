@@ -1,8 +1,12 @@
 package com.neu.cxl.web;
 
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +23,8 @@ public class ReviewAction extends ActionSupport{
 	private DoubanUser user;
 	
 	HttpServletRequest request = ServletActionContext.getRequest();
+	HttpServletResponse response = ServletActionContext.getResponse();
+	
 	List <DoubanReview> list = null;
 	public DoubanUser getUser() {
 		return user;
@@ -43,4 +49,33 @@ public class ReviewAction extends ActionSupport{
 		request.setAttribute("reviewInfo", this.doubanReviewService.selectReview(user));
 		return "selectreviewuser"; 
 	}
+	public void publishReview() throws IOException
+	{
+		response.addHeader("Content-Type", "text/html;charset=utf-8");
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+		String date = df.format(new Date());// new Date()为获取当前系统时间，也可使用当前时间戳
+		review.setReviewtime(date);
+		if(this.doubanReviewService.publishReview(review))
+		 {
+     	
+     	  response.getWriter().write("<script languge='javascript'>alert('评论发表成功');</script>");
+			}
+			else
+			{
+				response.getWriter().write("<script languge='javascript'>alert('评论发表失败'); ;</script>");
+			}
+	}
+	public String deleteReview() throws IOException
+	{
+		response.addHeader("Content-Type", "text/html;charset=utf-8");
+		this.doubanReviewService.deleteReview(review);
+		response.getWriter().write("<script languge='javascript'>alert('删除成功');</script>");
+			return "selectreviewuser";
+	}
+	
+	public void addgoodcount()
+	{
+		this.doubanReviewService.addReviewGoodCount(review);
+	}
 }
+

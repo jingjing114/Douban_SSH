@@ -6,7 +6,7 @@
 -->
 <hibernate-mapping>
     <class name="com.neu.cxl.entity.DoubanDirectortomovie" table="douban_directortomovie" catalog="movie">
-        <id name="correspondenceid" type="java.lang.Integer">
+        <id name="correspondenceid" type="java.lang.String">
             <column name="correspondenceid" />
             <generator class="uuid.hex" />
         </id>
