@@ -28,7 +28,7 @@
         <property name="reviewmoviename" type="java.lang.String">
             <column name="reviewmoviename" />
         </property>
-        <property name="reviewscore" type="java.lang.String">
+        <property name="reviewscore" type="java.lang.Float">
             <column name="reviewscore" />
         </property>
     </class>

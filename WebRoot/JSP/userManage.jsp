@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.*,com.neu.cxl.entity.DoubanUser" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
 <%
 String path = request.getContextPath();
@@ -30,6 +30,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link href="JSP/css/lines.css" rel='stylesheet' type='text/css' />
 <link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css"> 
 <!-- jQuery -->
+
+
+
 <script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
 
 <!---//webfonts--->  
@@ -41,13 +44,52 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 <script src="JSP/js/d3.v3.js"></script>
 <script src="JSP/js/rickshaw.js"></script>
+<script src="scripts/jquery.js"></script>
 
+<script >
+$(function prev(){
+	var pagecode=<%=request.getAttribute("pageCode")%>;
+	if(pagecode<=1)
+	{
+		$('#prev_page').css('display','none')
+		
+	}
+	$('#prev_page').on('mouseover', 'a', function (e){
+    var url="adminaction_userManage?pageCode="+(pagecode-1);
+    
+    $(e.target).attr("href",url);})
+});
+
+$(function next(){
+	var pagecode=<%=request.getAttribute("pageCode")%>;
+	
+	if("${requestScope.userlist}"=='[]')
+	{
+		$('#next_page').css('display','none')
+	}
+	$('#next_page').on('mouseover', 'a', function (e){
+      var url="adminaction_userManage?pageCode="+(pagecode+1);
+    $(e.target).attr("href",url);})
+});
+</script>
   </head>
   
   <body>
   
 		
-		
+		 	<%
+		DoubanUser user=(DoubanUser)session.getAttribute("admin");
+		if(!("管理员".equals((String)user.getRole())))
+		{
+			out.println("您还没有登录，请先登录！<br>");
+			out.println("3秒后跳转到登录页面...<br>");
+			response.setHeader("Refresh","3;URL=../login.jsp"); 
+
+			out.println("如果没有跳转，请点击<a href='login.jsp'>这里</a>跳转！");
+			
+		}
+		else {
+		%>
 		
 		
 		
@@ -69,7 +111,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">欢迎管理员${sessionScope.user.getUsername()}登录！</a>
+                <a class="navbar-brand" href="#">欢迎管理员${sessionScope.admin.getUsername()}登录！</a>
             </div>
             
             
@@ -121,6 +163,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 </li>
                                 <li>
                                     <a href="JSP/movieAdd.jsp">添加电影</a>
+                                </li>
+                                  <li>
+                                    <a href="adminaction_selectType">查看电影类型</a>
                                 </li>
                                    <li>
                                     <a href="adminaction_selectActor">查看演员</a>
@@ -201,12 +246,22 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	 
     </c:forEach>
     
-    
        </table>
        
-       
+      
+        
+    
        
 		   </div>
+		   
+            <div class="col-md-12 text-center">
+		            <ul class="pagination" id="page">
+		              <li class="prev" id="prev_page"><a href="#" >上一页</a></li>
+		          
+		              <li class="next" id="next_page"><a href="#">下一页</a></li>
+		            </ul>
+
+		          </div>
 	   </div>
 	   
 	   
@@ -286,6 +341,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   
      
     <script src="http://www.jq22.com/jquery/bootstrap-3.3.4.js"></script>
+    	<%}%>
 </body>
 
 

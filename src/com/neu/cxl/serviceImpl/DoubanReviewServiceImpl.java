@@ -20,8 +20,8 @@ public class DoubanReviewServiceImpl implements DoubanReviewService{
 	
 	
 	@Override
-	public ArrayList<DoubanReview> selectReview(DoubanUser user) {
-		return this.doubanReviewDAO.selectReview(user);
+	public ArrayList<DoubanReview> selectReview(DoubanUser user,int pageSize,int pageCode) {
+		return this.doubanReviewDAO.selectReview(user,pageSize,pageCode);
 	}
 
 	@Override
@@ -58,6 +58,30 @@ public class DoubanReviewServiceImpl implements DoubanReviewService{
 	@Override
 	public ArrayList<DoubanReview> selectReview(DoubanResource resource,int pageSize,int pageCode) {
 		return this.doubanReviewDAO.selectReview(resource,pageSize,pageCode);
+	}
+
+	@Override
+	public boolean updateAvgscore(DoubanResource doubanResource, DoubanReview review) {
+		if(this.doubanReviewDAO.updateAvgscore(doubanResource, review)>0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	@Override
+	public boolean updateReviewnumber(DoubanResource doubanResource, DoubanReview review) {
+		if(this.doubanReviewDAO.updateReviewnumber(doubanResource, review)>0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 }

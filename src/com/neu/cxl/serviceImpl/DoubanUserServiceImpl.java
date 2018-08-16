@@ -82,4 +82,8 @@ public class DoubanUserServiceImpl implements DoubanUserService{
 		return false;
 		}
 	}
+	@Override
+	public DoubanUser checkDoubanUserPhone(DoubanUser DoubanUser) {
+		return this.doubanUserDAO.checkDoubanUserPhone(DoubanUser);
+	}
 }

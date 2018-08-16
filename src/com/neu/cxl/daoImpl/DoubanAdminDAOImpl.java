@@ -115,9 +115,11 @@ public class DoubanAdminDAOImpl implements DoubanAdminDAO{
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public ArrayList<DoubanUser> findAllUser() {
+	public ArrayList<DoubanUser> findAllUser(int pageSize,int pageCode) {
 		String queryString = "from DoubanUser";
 		Query queryObject = this.getCurrentSession().createQuery(queryString);
+		queryObject.setFirstResult((pageCode-1)*pageSize);
+		queryObject.setMaxResults(pageSize);
 		return (ArrayList<DoubanUser>) queryObject.list();
 	}
 	@SuppressWarnings("unchecked")

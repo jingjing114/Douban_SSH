@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import com.neu.cxl.entity.DoubanResource;
 import com.neu.cxl.entity.DoubanReview;
 import com.neu.cxl.entity.DoubanUser;
 import com.neu.cxl.service.DoubanReviewService;
@@ -21,11 +23,22 @@ public class ReviewAction extends ActionSupport{
 	private DoubanReviewService doubanReviewService;
 	
 	private DoubanUser user;
-	
+	private DoubanResource resource=new DoubanResource();
+	private int pageCode;
 	HttpServletRequest request = ServletActionContext.getRequest();
 	HttpServletResponse response = ServletActionContext.getResponse();
 	
 	List <DoubanReview> list = null;
+	
+	
+	public int getPageCode() {
+		return pageCode;
+	}
+
+	public void setPageCode(int pageCode) {
+		this.pageCode = pageCode;
+	}
+
 	public DoubanUser getUser() {
 		return user;
 	}
@@ -44,9 +57,19 @@ public class ReviewAction extends ActionSupport{
 		this.review = review;
 	}
 	
+	
+	
+	public DoubanResource getResource() {
+		return resource;
+	}
+
+	public void setResource(DoubanResource resource) {
+		this.resource = resource;
+	}
+
 	public String selectReview()
 	{
-		request.setAttribute("reviewInfo", this.doubanReviewService.selectReview(user));
+		request.setAttribute("reviewInfo", this.doubanReviewService.selectReview(user,4,this.pageCode));
 		return "selectreviewuser"; 
 	}
 	public void publishReview() throws IOException
@@ -57,7 +80,9 @@ public class ReviewAction extends ActionSupport{
 		review.setReviewtime(date);
 		if(this.doubanReviewService.publishReview(review))
 		 {
-     	
+			this.resource.setMovieid(this.review.getReviewmovieid());
+			this.doubanReviewService.updateAvgscore(resource, review);
+			this.doubanReviewService.updateReviewnumber(resource, review);
      	  response.getWriter().write("<script languge='javascript'>alert('评论发表成功');</script>");
 			}
 			else

@@ -43,7 +43,7 @@
 
 <action name="adminaction_*" class="com.neu.cxl.web.AdminAction" method="{1}">
 
-<result name="input">/JSP/movieUpdate.jsp</result><!-- 发生错误或拦截时默认返回input对应的视图 -->
+<result name="input">/JSP/movieManage.jsp</result><!-- 发生错误或拦截时默认返回input对应的视图 -->
 <interceptor-ref name="defaultStack">
 <param name="fileUpload.maximumsize">4194304</param>
 <param name="fileUpload.allowedExtensions">.bmp,.gif,.jpg,.png</param>
@@ -56,7 +56,9 @@
 <result name="selectmovie">/JSP/movieSelect.jsp</result>
 <result name="selectactor">/JSP/actorSelect.jsp</result>
 <result name="selectdirector">/JSP/directorSelect.jsp</result>
-<result name="selecttype">/JSP/typeSelect.jsp</result>
+<result name="selecttype">/JSP/movieType.jsp</result>
+<result name="addmovie">/JSP/movieAdd.jsp</result>
+<result name="updatemovie" >/JSP/movieUpdate.jsp</result>
 </action>
 </package>
 </struts>    

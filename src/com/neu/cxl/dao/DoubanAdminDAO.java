@@ -22,7 +22,7 @@ public interface DoubanAdminDAO {
 	public int addCorrespondence(DoubanActortomovie at) ;
 	public int addCorrespondence(DoubanDirectortomovie dt) ; 
 	public int deleteDoubanReview(DoubanReview DoubanReview) ;
-	public ArrayList<DoubanUser> findAllUser() ;
+	public ArrayList<DoubanUser> findAllUser(int pageSize,int pageCode) ;
 	public ArrayList<DoubanReview> selectDoubanReview(DoubanUser user);
 	public ArrayList<DoubanResource> selectMovie() ;
 	public ArrayList<DoubanResource> selectMovieByNameKeyword(DoubanResource doubanResource) ;

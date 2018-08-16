@@ -38,7 +38,20 @@ public class AdminAction extends ActionSupport{
 	private String myfileFileName;
 	private String myfileContentType;
 	private DoubanType type;
+	private int pageCode;
 	
+	
+	
+	public int getPageCode() {
+		return pageCode;
+	}
+
+
+	public void setPageCode(int pageCode) {
+		this.pageCode = pageCode;
+	}
+
+
 	public DoubanType getType() {
 		return type;
 	}
@@ -125,7 +138,7 @@ public class AdminAction extends ActionSupport{
 	//用户列表
 	public String  userManage()
 	{
-		request.setAttribute("userlist", this.doubanAdminService.findAllUser());
+		request.setAttribute("userlist", this.doubanAdminService.findAllUser(10,this.pageCode));
 		return "usermanage";
 	}
 	//用户评论
@@ -183,10 +196,10 @@ public class AdminAction extends ActionSupport{
 		response.addHeader("Content-Type", "text/html;charset=utf-8");
 		if(this.myfile==null)
 		{
-			this.doubanAdminService.updateMovie(resource);
-			
-			return;
+			resource.setMovieimgurl("upload/movie/img01.jpg");
 		}
+		else
+		{
 		String path=ServletActionContext.getServletContext().getRealPath("/upload/movie");
 		File file=new File(path);
 		if(!file.exists())
@@ -197,7 +210,7 @@ public class AdminAction extends ActionSupport{
 			FileUtils.copyFile(myfile,new File(file,this.myfileFileName));
 		
 		resource.setMovieimgurl("upload/movie/"+this.myfileFileName);
-
+		}
 		if(this.doubanAdminService.addMovie(resource))
 		 {
 			request.getSession().setAttribute("movieid", this.resource.getMovieid());
@@ -218,10 +231,9 @@ public class AdminAction extends ActionSupport{
 		response.addHeader("Content-Type", "text/html;charset=utf-8");
 		if(this.myfile==null)
 		{
-			this.doubanAdminService.updateActor(actor);
-			
-			return;
+			actor.setActorphoto("upload/actor/img01.jpg");
 		}
+		else{
 		String path=ServletActionContext.getServletContext().getRealPath("/upload/actor");
 		File file=new File(path);
 		if(!file.exists())
@@ -232,7 +244,7 @@ public class AdminAction extends ActionSupport{
 			FileUtils.copyFile(myfile,new File(file,this.myfileFileName));
 		
 		actor.setActorphoto("upload/actor/"+this.myfileFileName);
-
+		}
 		if(this.doubanAdminService.addActor(actor))
 		{
 			response.addHeader("Content-Type", "text/html;charset=utf-8");
@@ -263,10 +275,9 @@ public class AdminAction extends ActionSupport{
 		response.addHeader("Content-Type", "text/html;charset=utf-8");
 		if(this.myfile==null)
 		{
-			this.doubanAdminService.updateDirector(director);
-			
-			return;
+			director.setDirectorphoto("upload/director/img01.jpg");
 		}
+		else{
 		String path=ServletActionContext.getServletContext().getRealPath("/upload/director");
 		File file=new File(path);
 		if(!file.exists())
@@ -276,8 +287,8 @@ public class AdminAction extends ActionSupport{
 		
 			FileUtils.copyFile(myfile,new File(file,this.myfileFileName));
 		
-	director.setDirectorphoto("upload/director/"+this.myfileFileName);
-		
+			director.setDirectorphoto("upload/director/"+this.myfileFileName);
+		}
 		
 		if(this.doubanAdminService.addDirector(director))
 		{
@@ -434,10 +445,19 @@ public class AdminAction extends ActionSupport{
 		this.doubanAdminService.addMovieType(type);
 		return "selecttype";
 	}
-	public String selectType()
-	{
-		
-		request.setAttribute("type", this.doubanAdminService.selectMovieType());
-		return "selecttype";
-	}
+	//电影类型下拉框
+			public String selectType()
+			{
+				
+				request.setAttribute("movietype", this.doubanAdminService.selectMovieType());
+				return "selecttype";
+			}
+	//电影类型下拉框
+		public void selectType2()
+		{
+			
+			request.setAttribute("movietype", this.doubanAdminService.selectMovieType());
+			
+		}
+	
 }

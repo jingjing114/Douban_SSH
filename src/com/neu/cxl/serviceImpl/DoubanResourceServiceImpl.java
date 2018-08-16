@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.neu.cxl.dao.DoubanResourceDAO;
 import com.neu.cxl.entity.DoubanResource;
+import com.neu.cxl.entity.DoubanType;
 import com.neu.cxl.service.DoubanResourceService;
 @Transactional
 @Repository("doubanResourceService")
@@ -61,5 +62,8 @@ public class DoubanResourceServiceImpl implements DoubanResourceService{
 	public ArrayList<DoubanResource> selectMovieSortByReviewNum() {
 		return this.doubanResourceDAO.selectMovieSortByReviewNum();
 	}
-
+	@Override
+	public ArrayList<DoubanType> selectMovieType() {
+		return this.doubanResourceDAO.selectMovieType();
+	}
 }

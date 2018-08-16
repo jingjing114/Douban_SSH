@@ -13,5 +13,5 @@ public interface DoubanUserService {
 	public boolean updateDoubanUserInfo(DoubanUser DoubanUser);
 	public boolean updatePassword(DoubanUser DoubanUser);
 	public List<DoubanUser> FindAll();
-	
+	public DoubanUser checkDoubanUserPhone(DoubanUser DoubanUser);
 }

@@ -1,9 +1,13 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.*,com.neu.cxl.entity.DoubanUser" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
+<c:if test="${movietype==null}">
+<s:action name="adminaction_selectType2" executeResult="true" namespace="/"/>
+</c:if>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -83,32 +87,43 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 	 }
 	</style>
+<script>
+function show()
+{
+	var type='<%=request.getParameter("movietype") %>';
+	var select=document.getElementById("select");
+	var ops=select.getElementsByTagName("option");
+	for (var i=1;i<ops.length;i++)
+	{
+		if(ops[i].value==type)
+		{
+			ops[i].selected=true;
+		}
+	}
+	
+	
+}
+</script>
+  <body onload="show()">
+  
+  
+  
+  
+  
+  
+ 	<%
+		DoubanUser user=(DoubanUser)session.getAttribute("admin");
+		if(!("管理员".equals((String)user.getRole())))
+		{
+			out.println("您还没有登录，请先登录！<br>");
+			out.println("3秒后跳转到登录页面...<br>");
+			response.setHeader("Refresh","3;URL=../login.jsp"); 
 
-  <body>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-    
-  <body >
-  
-		
-		
-		
-		
-		
+			out.println("如果没有跳转，请点击<a href='login.jsp'>这里</a>跳转！");
+			
+		}
+		else {
+		%>
 		
 		
 		
@@ -126,7 +141,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">欢迎管理员${sessionScope.user.getUsername()}登录！</a>
+                <a class="navbar-brand" href="#">欢迎管理员${sessionScope.admin.getUsername()}登录！</a>
             </div>
             
             
@@ -178,6 +193,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 </li>
                                 <li>
                                     <a href="JSP/movieAdd.jsp">添加电影</a>
+                                </li>
+                                 <li>
+                                    <a href="adminaction_selectType">查看电影类型</a>
                                 </li>
                                    <li>
                                     <a href="adminaction_selectActor">查看演员</a>
@@ -240,27 +258,33 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
        
       
   		<div class="form">
-	                  <h3 style="margin-left: 42px;">电影信息修改</h3><br>
+	     <h3 style="margin-left: 42px;">电影信息修改</h3><br>
 
 			
-         <form action="adminaction_updateMovie" method="post">
+         <form action="adminaction_updateMovie" method="post"  enctype="multipart/form-data">
 		<div class="inside"  >
 		<div>  	<img  src="<%=request.getParameter("movieimgurl") %>" style="width:180px;height:218px;margin-left:43px;">
-				电影图片：<input type="file" name="myfile" ><br>
+				<input type="file" name="myfile" ><br>
 			<div>
-		<input type="hidden" name="movieid" value="<%=request.getParameter("movieid") %>"><br>
-	<span>	&nbsp;&nbsp;&nbsp;&nbsp;电影ID：<input type="text"  value="<%=request.getParameter("movieid") %>" disabled><br></span>
+		<input type="hidden" name="resource.movieid" value="<%=request.getParameter("movieid") %>">
+		<input type="hidden" name="resource.moviereviewnumber" value="<%=request.getParameter("moviereviewnumber") %>" >
+	电影ID：<input type="text"  value="<%=request.getParameter("movieid") %>" disabled><br>
 	
 		电影名称：<input type="text" name="resource.moviename" value="<%=request.getParameter("moviename") %>"><br>
-		电影类型：<input type="text" name="resource.movietype" value="<%=request.getParameter("movietype") %>"><br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		电影类型：<select id="select" name="resource.movietype" style="width:150px" >
+			<c:forEach var="type" items="${requestScope.movietype}" varStatus="status">
+  		 
+  		 	<option value="${type.getTypename()}">${type.getTypename()}</option>
 
-		电影评分：<input type="text" name="resource.movieavgscore" value="<%=request.getParameter("avgscore") %>"><br>		
+  			</c:forEach>
+
+		</select><br>
+				
 		电影语言：<input type="text" name="resource.movielanguage" value="<%=request.getParameter("movielanguage") %>"><br>
 		电影地区：<input type="text" name="resource.moviearea" value="<%=request.getParameter("moviearea") %>"><br>
 		电影年份：<input type="text" name="resource.movieyear" value="<%=request.getParameter("movieyear") %>"><br>
 		电影时长：<input type="text" name="resource.movietime" value="<%=request.getParameter("movietime") %>"><br>
-		电影评论人数：<input type="text" name="resource.moviereviewnumber" value="<%=request.getParameter("moviereviewnumber") %>"><br>
+		电影评论人数：<input type="text" name="resource.moviereviewnumber" value="<%=request.getParameter("moviereviewnumber") %>" disabled><br>
 		电影播放地址：<input type="text" name="resource.movieurl" value="<%=request.getParameter("movieurl") %>"><br>
 		电影描述信息：<textarea name="resource.moviedescription" cols="25" rows="7" align="left">
 					<%=request.getParameter("moviedescription") %>
@@ -305,17 +329,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   
   input{margin:0px 10px 10px 10px;}
   
-  <style>
+  </style>
   
-  one.{
-  
-  }
-  
-  
-  
-  
-  <style>
-  
+
+  	<%}%>
   
   
  

@@ -75,7 +75,9 @@ public class DoubanAdminServiceImpl implements DoubanAdminService{
 	//添加电影
 	@Override
 	public boolean addMovie(DoubanResource DoubanResource) {
-		DoubanResource.setMoviereviewnumber("0");
+		DoubanResource.setMoviereviewnumber(0);
+		DoubanResource.setAvgscore((float)0);
+		
 		if(this.doubanAdminDAO.addMovie(DoubanResource)>0)
 		{
 			return true;
@@ -123,8 +125,8 @@ public class DoubanAdminServiceImpl implements DoubanAdminService{
 	}
 	//查询所有用户
 	@Override
-	public ArrayList<DoubanUser> findAllUser() {
-		return this.doubanAdminDAO.findAllUser();
+	public ArrayList<DoubanUser> findAllUser(int pageSize,int pageCode) {
+		return this.doubanAdminDAO.findAllUser(pageSize,pageCode);
 	}
 	//查询用户评论
 	@Override

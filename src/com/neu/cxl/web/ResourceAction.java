@@ -1,6 +1,6 @@
 package com.neu.cxl.web;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.neu.cxl.entity.DoubanActor;
 import com.neu.cxl.entity.DoubanDirector;
 import com.neu.cxl.entity.DoubanResource;
-import com.neu.cxl.entity.Page;
+import com.neu.cxl.entity.DoubanType;
 import com.neu.cxl.service.DoubanActorAndDirectorService;
 import com.neu.cxl.service.DoubanResourceService;
 import com.neu.cxl.service.DoubanReviewService;
@@ -25,16 +25,24 @@ public class ResourceAction extends ActionSupport{
 	private DoubanActorAndDirectorService doubanActorAndDirectorService;
 	@Autowired
 	private DoubanReviewService doubanReviewService;
-	
+	private DoubanType movietype;
 	private DoubanResource resource=new DoubanResource();
 	private DoubanActor actor;
 	private DoubanDirector director;
 	//private Page page=new Page();
-	private int pageCode;
-	private int pageSize=15;
+	private int pageCode=1;
+	private int pageSize=16;
 	
 	
 	
+	public DoubanType getMovietype() {
+		return movietype;
+	}
+
+	public void setMovietype(DoubanType movietype) {
+		this.movietype = movietype;
+	}
+
 	public int getPageCode() {
 		return pageCode;
 	}
@@ -117,7 +125,7 @@ public class ResourceAction extends ActionSupport{
 		}
 		else if(type.equals("avgscore"))
 		{
-			this.resource.setAvgscore(keyword);
+			this.resource.setAvgscore((float)Integer.parseInt(keyword));
 			list=this.doubanResourceService.selectMovieByScore(this.resource,this.pageSize,this.pageCode);
 		}
 		else if(type.equals("movietype"))
@@ -153,6 +161,13 @@ public class ResourceAction extends ActionSupport{
 	        return "selectmovie";
 	        
 	}
+	public String sortByHighScore()
+	{
+		
+		request.setAttribute("movielist", this.doubanResourceService.selectMovieSortByScore());
+		
+		return "selectmovie";
+	}
 	//电影类型查询
 	/*public String selectMovieByType()
 	{
@@ -176,7 +191,13 @@ public class ResourceAction extends ActionSupport{
 		request.setAttribute("actor",this.doubanActorAndDirectorService.selectActorByMovieId(resource));
 		request.setAttribute("director",this.doubanActorAndDirectorService.selectDirectorByMovieId(resource));
 		request.setAttribute("movie",this.doubanResourceService.selectMovieById(resource));
-		request.setAttribute("review", this.doubanReviewService.selectReview(resource,10,this.pageCode));
+		request.setAttribute("review", this.doubanReviewService.selectReview(resource,5,this.pageCode));
 		return "movieinfo";
+	}
+	public void selectType()
+	{
+		
+		request.setAttribute("movietype", this.doubanResourceService.selectMovieType());
+		
 	}
 }

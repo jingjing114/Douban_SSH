@@ -45,6 +45,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <div id="div1" >
 	<img src="${sessionScope.user.getIcon()}"  />
 	</div>
+	<input type="hidden" name="user.role" value="${sessionScope.user.getRole()}">
+	<input type="hidden" name="user.icon" value="${sessionScope.user.getIcon()}">
+	<input type="hidden" name="user.phone" value="${sessionScope.user.getPhone()}">
   <input type="hidden" name="user.username" value="${sessionScope.user.getUsername()}"><br>
   <input type="hidden" name="user.userid" value="${sessionScope.user.getUserid()}"><br>
      用户名：<input type="text" name="username" disabled="disabled" value="${sessionScope.user.getUsername()}"><br>
@@ -56,7 +59,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	
   	年龄：<input type="text" name="user.age" value="${sessionScope.user.getAge()}"><br>
   	
-  	手机：<input type="text" name="user.phone" value="${sessionScope.user.getPhone()}"><br>
+  	手机：<input type="text" name="user.phone" value="${sessionScope.user.getPhone()}" disabled><br>
   	邮箱：<input type="email" name="user.email" value="${sessionScope.user.getEmail()}"><br>
   	个人简介：<textarea name="user.introduction" >${sessionScope.user.getIntroduction()}</textarea>
    <input type="submit" value="提交" align="left">

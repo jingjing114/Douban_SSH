@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.*,com.neu.cxl.entity.DoubanUser" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
 <%
 String path = request.getContextPath();
@@ -82,38 +82,29 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	 margin-left:400px;
 
 	 }
+	   
+ 
+   
+  input{margin:10px 10px 10px 10px;}
+  
+
 	</style>
 
   <body>
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-    
-  <body >
-  
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+ 	<%
+		DoubanUser user=(DoubanUser)session.getAttribute("admin");
+		if(!("管理员".equals((String)user.getRole())))
+		{
+			out.println("您还没有登录，请先登录！<br>");
+			out.println("3秒后跳转到登录页面...<br>");
+			response.setHeader("Refresh","3;URL=../login.jsp"); 
+
+			out.println("如果没有跳转，请点击<a href='login.jsp'>这里</a>跳转！");
+			
+		}
+		else {
+		%>
 		
           <div id="wrapper">
  
@@ -126,7 +117,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">欢迎管理员${sessionScope.user.getUsername()}登录！</a>
+                <a class="navbar-brand" href="#">欢迎管理员${sessionScope.admin.getUsername()}登录！</a>
             </div>
             
             
@@ -178,6 +169,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 </li>
                                 <li>
                                     <a href="JSP/movieAdd.jsp">添加电影</a>
+                                </li>
+                                  <li>
+                                    <a href="adminaction_selectType">查看电影类型</a>
                                 </li>
                                    <li>
                                     <a href="adminaction_selectActor">查看演员</a>
@@ -235,7 +229,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	   
 	   <br>
 	   
-      
+      <div class="form">
        
      <h3>导演信息添加</h3>
 		<form action="adminaction_addDirector" method="post" enctype="multipart/form-data">
@@ -256,7 +250,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<input type="reset" value="重置"><br>
 		</form>
   
-     </from>
+     </div>
      
 	   <br>
 	  
@@ -281,27 +275,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
   
   
-  
-  
-  
-  
-  
-  
-  <style>
-  
-  
-  input{margin:10px 10px 10px 10px;}
-  
-  <style>
-  
-  
-  
-  
-  
-  
-  <style>
-  
-  
+  	<%}%>
   
  
    </body>

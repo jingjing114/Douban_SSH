@@ -13,7 +13,7 @@
         <property name="moviename" type="java.lang.String">
             <column name="moviename" />
         </property>
-        <property name="avgscore" type="java.lang.String">
+        <property name="avgscore" type="java.lang.Float">
             <column name="avgscore" />
         </property>
         <property name="movietype" type="java.lang.String">
@@ -25,7 +25,7 @@
         <property name="movieimgurl" type="java.lang.String">
             <column name="movieimgurl" />
         </property>
-        <property name="moviereviewnumber" type="java.lang.String">
+        <property name="moviereviewnumber" type="java.lang.Integer">
             <column name="moviereviewnumber" />
         </property>
         <property name="moviedescription" type="java.lang.String">

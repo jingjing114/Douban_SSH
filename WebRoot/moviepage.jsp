@@ -54,6 +54,7 @@ margin-left:380px;
 .div_img{width:60px;height:60px;border-radius:100px; overflow:hidden}
   .div_img img{width:100%;height:100%}
 </style>
+<script src="scripts/jquery.js"></script>
 <script>
 
 function show(){
@@ -79,7 +80,29 @@ function publish()
   window.open("publishreview.jsp?movieid=${requestScope.movie.getMovieid()}&moviename=${requestScope.movie.getMoviename()}&reviewuser=${sessionScope.user.getUsername()}",'短评','height=300,width=520,top=400,left=800,toolbar=no,menubar=no,scrollbars=no,resizable=no,location=0,status=1');
 
   }
+$(function prev(){
+	var pagecode=<%=request.getAttribute("pageCode")%>;
+	if(pagecode<=1)
+	{
+		$('#prev_page').css('display','none')
+		
+	}
+	$('#prev_page').on('mouseover', 'a', function (e){
+    var url="movieaction_movieInfo?resource.movieid=${requestScope.movie.getMovieid()}&pageCode="+(pagecode-1);
+    
+    $(e.target).attr("href",url);})
+});
 
+$(function next(){
+	var pagecode=<%=request.getAttribute("pageCode")%>;
+	if("${requestScope.review}"=='[]')
+	{
+		$('#next_page').css('display','none')
+	}
+	$('#next_page').on('mouseover', 'a', function (e){
+    var url="movieaction_movieInfo?resource.movieid=${requestScope.movie.getMovieid()}&pageCode="+(pagecode+1);
+    $(e.target).attr("href",url);})
+});
 
 </script>
 	<body onload="show()">
@@ -270,7 +293,7 @@ function publish()
 			<!-- End nav -->
 		</header>
 
-		<section class="not-found">
+		<section class="not-found" style="padding-top: 217px;padding-bottom: 20px;">
 	<div class="container"  >
 								
 					
@@ -403,7 +426,7 @@ function publish()
 
 
 
-<div id="interest_sect_level" class="clearfix">
+<div id="interest_sect_level" class="clearfix" >
         
           
         <div class="ll j a_stars">
@@ -421,16 +444,16 @@ function publish()
     <a name="intro"></a>
     
         <br>
-        <br>
+  
 
             
             
-    <h2>
+    <h2 style="font-size:20px;">
         剧情简介
              
     </h2>
-
-            <div class="indent" id="link-report">
+<br>
+            <div class="indent" id="link-report" style="padding-left:230px; padding-right:230px;width:1440px;" >
                     
                         <span property="v:summary" class="">
                                
@@ -456,22 +479,22 @@ function publish()
 <div id="celebrities" class="celebrities related-celebrities">
 
 <br>
-<br>
-<br>
+
   
-    <h2>
+    <h2 style="font-size:20px;">
         相关影人
              
     </h2>
+
 <br>
-<br>
-  
+   <div style="width:1300px;padding-left:230px">
   <c:forEach var="a" items="${requestScope.actor}" varStatus="status">
   		 <div class="actor1"><a href="aadaction_selectActor?actor.actorid=${a.getActorid()}"><img src="${a.getActorphoto()}" height="218" width="180"><p>${a.getActorname()}<p></a></div>  
   		 </c:forEach></span>
 </div>
+</div>
 
-			</div>
+</div>
 		</section>
 <div class="div_review" >
 <span>最近评论</span><br>
@@ -484,29 +507,26 @@ function publish()
   		<span>${r.getReviewtime()}</span><br>
   		 <span>${r.getReviewcontent()}</span>
   		  <hr style=" height:2px;border:none;border-top:2px dotted #185598;"size=2>
-  		 </c:forEach></span>
-  		 
-  		    
-</div>
- 
-	 <div id="footer">
+  		 </c:forEach>
+  		 	  <div id="footer">
             <div class="footer-extra"></div>
          <div class="col-md-12 text-center">
 		            <ul class="pagination" id="page">
 		            
 		              <li class="prev" id="prev_page"><a href="" ><i class="ion-ios-arrow-left"></i></a></li>
-		              <!--<li class="active"><a href="#">1</a></li>
-		              <li><a href="#" >2</a></li>
-		              <li><a href="movieaction_selectMovie?type=${requestScope.type}&keyword=${requestScope.keyword}&pageCode=3">3</a></li>
-		              <li><a href="#">...</a></li>
-		              <li><a href="#">97</a></li>
-		              -->
+		              
 		              
 		              <li class="next" id="next_page"><a href=""><i class="ion-ios-arrow-right"></i></a></li>
 		            </ul>
 		            
 		          </div>
-		          </div>	
+		          </div>
+  		 </div>
+  		
+  		    
+
+ 
+		
 		          
 		
 	<!-- Start footer -->

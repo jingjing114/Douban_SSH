@@ -1,10 +1,13 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-
+<c:if test="${movietype==null}">
+<s:action name="movieaction_selectType" executeResult="true" namespace="/"/>
+</c:if>
 
 <!DOCTYPE html>
 <html>
@@ -35,16 +38,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<link rel="stylesheet" href="css/demo.css">
 		<link rel="stylesheet"  href="css/moviepage.css" >
 	</head>
+
 <style>
-.div_img{width:60px;height:60px;border-radius:100px; overflow:hidden}
-  .div_img img{width:100%;height:100%}
+.div_img img{
+ height:40px;width:40px;"
+}
+.pic{
+margin:10px;
+} 
+.moviepage{
+width:1000px;
+}
 </style>
-<script src="js/jquery.js"></script>
+<style>
+
+</style>
+<script src="scripts/jquery.js"></script>
 <script>
 function show(){
 
 var session="<%=session.getAttribute("user")%>"
-var movie="<%=request.getAttribute("movielist")%>";
 //alert(session)
 if(session=="null")
 {
@@ -57,20 +70,16 @@ else
 	document.getElementById("div_user").innerHTML="<div  class='col-md-3 col-sm-12 text-right'><ul class='nav-icons'><li><div class='div_img'><img class='img-circle' src='${sessionScope.user.getIcon()}'  /></div></li><li><a href='reviewaction_selectReview?user.username=${sessionScope.user.getUsername()}'><span>${sessionScope.user.getUsername()}</span></a></li></ul></div>"
 }
 
-if(movie=="null")
-{
-	document.getElementById("next_page").style.display="none"
-}
-
 }
 
 $(function prev(){
 	var pagecode=<%=request.getAttribute("pageCode")%>;
-	if(pagecode<=2)
+	if(pagecode<=1)
 	{
-		pagecode=2;
+		$('#prev_page').css('display','none')
+		
 	}
-	$('#prev_page').on('click', 'a', function (e){
+	$('#prev_page').on('mouseover', 'a', function (e){
     var url="movieaction_selectMovie?type=${requestScope.type}&keyword=${requestScope.keyword}&pageCode="+(pagecode-1);
     
     $(e.target).attr("href",url);})
@@ -78,7 +87,12 @@ $(function prev(){
 
 $(function next(){
 	var pagecode=<%=request.getAttribute("pageCode")%>;
-	$('#next_page').on('click', 'a', function (e){
+	
+	if("${requestScope.movielist}"=='')
+	{
+		$('#next_page').css('display','none')
+	}
+	$('#next_page').on('mouseover', 'a', function (e){
     var url="movieaction_selectMovie?type=${requestScope.type}&keyword=${requestScope.keyword}&pageCode="+(pagecode+1);
     $(e.target).attr("href",url);})
 });
@@ -98,35 +112,7 @@ $(function next(){
 						</div>
 						<div class="col-md-6 col-sm-12">
 							
-							<form class="search" autocomplete="off" action="movieaction_selectMovie">
-							
-								<div class="form-group">
-									<div class="input-group">
-										<input type="text" name="keyword" class="form-control" placeholder="输入电影">									
-										<div class="input-group-btn">
-										<button  class="btn btn-primary" ><i class="ion-search"></i></button>
-										</div>
-									
-									</div>
-								</div>
-							
-								<div class="help-block">
-								<input type="radio" name="type" value="moviename" checked="checked">按名称
-								<input type="radio" name="type" value="movieyear" >按年份
-								<input type="radio" name="type" value="avgscore" >按评分
-								<input type="radio" name="type" value="movieactorid" >按演员
-								<input type="radio" name="type" value="movietype" >按类型
-							
-								<!--  	<div>热门:</div>
-									<ul>
-										<li><a href="#">侏罗纪世界2</a></li>
-										<li><a href="#">我不是药神</a></li>
-										<li><a href="#">邪不压正</a></li>
-										<li><a href="#">犬之岛</a></li>
-										<li><a href="#">摩天营救</a></li>
-									</ul>-->
-								</div>
-							</form>											
+						
 						</div>
 						<div id="div_user" >
 						
@@ -139,17 +125,21 @@ $(function next(){
 
 		
 		</header>
+	
+		
 		
 		
 	<section class="not-found">
-			<div class="container">
+			<div class="container"  style="width: 1120px;">
     <div id="wrapper">
         
 
         
-    <div id="content">
+    <div id="content" style="
+    margin-left: 113px;
+">
         
-    <h1>选电影</h1>
+   
 
         <div class="grid-16-8 clearfix">
             
@@ -157,22 +147,33 @@ $(function next(){
             <div class="article">
                 
     
+                
+    <br>
+                
+    <br>
+   
+    
+                
+    <br>
+    <br>
     
 <div class="gaia">
     <div class="detail-pop"></div>
 
     <div class="fliter-wp">
-        
+         <h1>选电影</h1>
+         <br>
          <form action="movieaction_selectMovie" class="gaia_frm" autocomplete="off">
         <input type="hidden" name="type" value="moviename">
           <div class="form-group">
 							<div class="input-group">
 							
-										<input type="text" name="keyword" class="form-control" placeholder="输入你想要的电影信息"  size="px">	
-											<div class="input-group-btn">
+										<input type="text" name="keyword" class="form-control" placeholder="输入你想要的电影信息"  size="px"  style="width: 788px; margin-left: 30px">	
+										<dic class="new1">
+											<div class="input-group-btn" style=" style="padding-right: 80px;">
 											<button class="btn btn-primary"><i class="ion-search"></i></button>
 										</div>
-
+</dic>
 									</div>
 								</div>
         <div class="tool">
@@ -194,32 +195,20 @@ $(function next(){
         
    
         
-        <div class="tag-list">
-         <a href="movieaction_selectMovie?type=爱情&keyword=1" > <label class="select"><input type="button" name="tag" value="爱情"> </label></a>
-         <a href="movieaction_selectMovie?type=惊悚&keyword=1" >	<label class="select"><input type="button" name="tag" value="惊悚"> </label></a>
-         <a href="movieaction_selectMovie?type=动作&keyword=1" >	<label class="select"><input type="button" name="tag" value="动作"> </label></a>
-         <a href="movieaction_selectMovie?type=灾难&keyword=1" >	<label class="select"><input type="button" name="tag" value="灾难"> </label></a>
-         <a href="movieaction_selectMovie?type=历史&keyword=1" >	<label class="select"><input type="button" name="tag" value="历史"> </label></a>
-         <a href="movieaction_selectMovie?type=战争&keyword=1" >	<label class="select"><input type="button" name="tag" value="战争"> </label></a>
-         <a href="movieaction_selectMovie?type=喜剧&keyword=1" >	<label class="select"><input type="button" name="tag" value="喜剧"> </label></a>
-         <a href="movieaction_selectMovie?type=犯罪&keyword=1" >	<label class="select"><input type="button" name="tag" value="犯罪"> </label></a>
-         <a href="movieaction_selectMovie?type=科幻&keyword=1" >	<label class="select"><input type="button" name="tag" value="科幻"> </label></a>
-         <a href="movieaction_selectMovie?type=悬疑&keyword=1" >    <label class="select"><input type="button" name="tag" value="悬疑"> </label></a>
+        <div class="tag-list"  style=“text-align:center;>
+		
+       	<c:forEach var="movietype" items="${requestScope.movietype}" varStatus="status">
+       	 <a href="movieaction_selectMovie?type=${movietype.getTypename()}&keyword=1" > <label class="select"><input type="button" name="tag" value="${movietype.getTypename()}"> </label></a>
+       	</c:forEach>
+       
         </div>
-        	
-        
-        
-        
-        
-<div class="filter">
-   
-            <input type="hidden" name="page_limit" value="20">
-            <input type="hidden" name="page_start" value="0">
-        </div>
-        
      
-        	
-     <div class="moviepic">
+        
+        
+        
+        
+    
+     <div class="moviepage"> 
     <c:forEach var="movie" items="${requestScope.movielist}" varStatus="status">
     <div class="pic" width="200" >
     <a href="movieaction_movieInfo?resource.movieid=${movie.getMovieid()}">
@@ -229,81 +218,72 @@ $(function next(){
     </a>
     </div>
     </c:forEach>
-    </div>
+  </div>
+  
+   
         </div>
-        </div>
-     </div>
-     </div>
-     </div>
-     </div>
-     </div>
      <h4><span><font color="red">${requestScope.msg}</font></span></h4>
+     
+     
+     
+     
       <div id="footer">
             <div class="footer-extra"></div>
          <div class="col-md-12 text-center">
 		            <ul class="pagination" id="page">
-		            
-		              <li class="prev" id="prev_page"><a href="" ><i class="ion-ios-arrow-left"></i></a></li>
-		              <!--<li class="active"><a href="#">1</a></li>
-		              <li><a href="#" >2</a></li>
-		              <li><a href="movieaction_selectMovie?type=${requestScope.type}&keyword=${requestScope.keyword}&pageCode=3">3</a></li>
-		              <li><a href="#">...</a></li>
-		              <li><a href="#">97</a></li>
-		              -->
-		              
-		              <li class="next" id="next_page"><a href=""><i class="ion-ios-arrow-right"></i></a></li>
+		              <li class="prev" id="prev_page"><a href="#" ><i class="ion-ios-arrow-left"></i></a></li>
+		          
+		              <li class="next" id="next_page"><a href="#"><i class="ion-ios-arrow-right"></i></a></li>
 		            </ul>
 		            
 		          </div>
 		          </div>
 		          
 </section>
-     </div>
+   
      
    
 		          
 		          
 
-		
-
-		<!-- Start footer -->
 		<footer class="footer">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-3 col-sm-6 col-xs-12">
 						<div class="block">
-							<h1 class="block-title">Company Info</h1>
+							<h1 class="block-title">公司简介</h1>
 							<div class="block-body">
 								<figure class="foot-logo">
-									<img src="images/logo-light.png" class="img-responsive" alt="Logo">
+ <img src="images/logo.png">
+ 	
 								</figure>
 								<p class="brand-description">
-									Magz is a HTML5 &amp; CSS3 magazine template based on Bootstrap 3.
+									抽象电影网是由任龙飞同学创建的一个抽象的电影评论网站。
 								</p>
-								<a href="page.html" class="btn btn-magz white">About Us <i class="ion-ios-arrow-thin-right"></i></a>
+								<a href="page.html" class="btn btn-magz white">关于我们<i class="ion-ios-arrow-thin-right"></i></a>
 							</div>
 						</div>
 					</div>
 					<div class="col-md-3 col-sm-6 col-xs-12">
 						<div class="block">
-							<h1 class="block-title">Popular Tags <div class="right"><a href="#">See All <i class="ion-ios-arrow-thin-right"></i></a></div></h1>
+							<h1 class="block-title">热门标签<div class="right"><a href="#">全部查看<i class="ion-ios-arrow-thin-right"></i></a></div></h1>
 							<div class="block-body">
 								<ul class="tags">
-									<li><a href="#">HTML5</a></li>
-									<li><a href="#">CSS3</a></li>
-									<li><a href="#">Bootstrap 3</a></li>
-									<li><a href="#">Web Design</a></li>
-									<li><a href="#">Creative Mind</a></li>
-									<li><a href="#">Standing On The Train</a></li>
-									<li><a href="#">at 6.00PM</a></li>
+									<li><a href="#">动作片</a></li>
+									<li><a href="#">动漫</a></li>
+									<li><a href="#">纪录片</a></li>
+									<li><a href="#">电影剧照</a></li>
+									<li><a href="#">评分</a></li>
+									<li><a href="#">热门影评</a></li>
+									<li><a href="#">影院热映</a></li>
 								</ul>
 							</div>
 						</div>
 						<div class="line"></div>
 						<div class="block">
-							<h1 class="block-title">Newsletter</h1>
+							<h1 class="block-title">订阅抽象</h1>
 							<div class="block-body">
-								<p>By subscribing you will receive new articles in your email.</p>
+								<p>告诉我们您的邮箱，您将会收到关于抽象的更多资讯</p>
 								<form class="newsletter">
 									<div class="input-group">
 										<div class="input-group-addon">
@@ -311,24 +291,24 @@ $(function next(){
 										</div>
 										<input type="email" class="form-control email" placeholder="Your mail">
 									</div>
-									<button class="btn btn-primary btn-block white">Subscribe</button>
+									<button class="btn btn-primary btn-block white">订阅</button>
 								</form>
 							</div>
 						</div>
 					</div>
 					<div class="col-md-3 col-sm-6 col-xs-12">
 						<div class="block">
-							<h1 class="block-title">Latest News</h1>
+							<h1 class="block-title">最近新闻</h1>
 							<div class="block-body">
 								<article class="article-mini">
 									<div class="inner">
 										<figure>
 											<a href="single.html">
-												<img src="images/news/img12.jpg" alt="Sample Article">
+												<img src="images/pic3.jpg" alt="Sample Article">
 											</a>
 										</figure>
 										<div class="padding">
-											<h1><a href="single.html">Donec consequat lorem quis augue pharetra</a></h1>
+											<h1><a href="single.html"> 《狄仁杰》 剧组全国巡演开始，第一站大连 </a></h1>
 										</div>
 									</div>
 								</article>
@@ -336,11 +316,11 @@ $(function next(){
 									<div class="inner">
 										<figure>
 											<a href="single.html">
-												<img src="images/news/img14.jpg" alt="Sample Article">
+												<img src="images/pic6.jpg" alt="Sample Article">
 											</a>
 										</figure>
 										<div class="padding">
-											<h1><a href="single.html">eu dapibus risus aliquam etiam ut venenatis</a></h1>
+											<h1><a href="single.html">华谊兄弟入股抽象电影网，双方达成战略协议</a></h1>
 										</div>
 									</div>
 								</article>
@@ -348,96 +328,65 @@ $(function next(){
 									<div class="inner">
 										<figure>
 											<a href="single.html">
-												<img src="images/news/img15.jpg" alt="Sample Article">
+												<img src="images/pic7.jpg" alt="Sample Article">
 											</a>
 										</figure>
 										<div class="padding">
-											<h1><a href="single.html">Nulla facilisis odio quis gravida vestibulum </a></h1>
+											<h1><a href="single.html">抽象影业昨日召开发布会，产业布局重新生态链 </a></h1>
 										</div>
 									</div>
 								</article>
-								<article class="article-mini">
-									<div class="inner">
-										<figure>
-											<a href="single.html">
-												<img src="images/news/img16.jpg" alt="Sample Article">
-											</a>
-										</figure>
-										<div class="padding">
-											<h1><a href="single.html">Proin venenatis pellentesque arcu vitae </a></h1>
-										</div>
-									</div>
-								</article>
-								<a href="#" class="btn btn-magz white btn-block">See All <i class="ion-ios-arrow-thin-right"></i></a>
+								
+								<a href="#" class="btn btn-magz white btn-block">查看 全部<i class="ion-ios-arrow-thin-right"></i></a>
 							</div>
 						</div>
 					</div>
 					<div class="col-md-3 col-xs-12 col-sm-6">
 						<div class="block">
-							<h1 class="block-title">Follow Us</h1>
+							<h1 class="block-title">关注我们</h1>
 							<div class="block-body">
-								<p>Follow us and stay in touch to get the latest news</p>
+								<p>关注我们并了解抽象电影网的最新动态</p>
 								<ul class="social trp">
 									<li>
+										<a href="#" >
+											<img src="images/vxlogo.jpg" alt="weixin">
+									
+										</a>
+									</li>
+									<li>
+										<a href="#" >
+										
+											<img src="images/weibologo.jpg"alt="weibo">
+										</a>
+									</li>
+									<li>
+										<a href="#">
+										<img src="images/qqzone.jpg" alt="qqzone">
+										</a>
+									</li>
+										<li>
 										<a href="#" class="facebook">
 											<svg><rect width="0" height="0"/></svg>
 											<i class="ion-social-facebook"></i>
 										</a>
 									</li>
-									<li>
-										<a href="#" class="twitter">
-											<svg><rect width="0" height="0"/></svg>
-											<i class="ion-social-twitter-outline"></i>
-										</a>
-									</li>
+									
 									<li>
 										<a href="#" class="youtube">
 											<svg><rect width="0" height="0"/></svg>
 											<i class="ion-social-youtube-outline"></i>
 										</a>
 									</li>
+									
+								
 									<li>
-										<a href="#" class="googleplus">
+										<a href="#" class="twitter">
 											<svg><rect width="0" height="0"/></svg>
-											<i class="ion-social-googleplus"></i>
+											<i class="ion-social-twitter-outline"></i>
 										</a>
 									</li>
-									<li>
-										<a href="#" class="instagram">
-											<svg><rect width="0" height="0"/></svg>
-											<i class="ion-social-instagram-outline"></i>
-										</a>
-									</li>
-									<li>
-										<a href="#" class="tumblr">
-											<svg><rect width="0" height="0"/></svg>
-											<i class="ion-social-tumblr"></i>
-										</a>
-									</li>
-									<li>
-										<a href="#" class="dribbble">
-											<svg><rect width="0" height="0"/></svg>
-											<i class="ion-social-dribbble"></i>
-										</a>
-									</li>
-									<li>
-										<a href="#" class="linkedin">
-											<svg><rect width="0" height="0"/></svg>
-											<i class="ion-social-linkedin"></i>
-										</a>
-									</li>
-									<li>
-										<a href="#" class="skype">
-											<svg><rect width="0" height="0"/></svg>
-											<i class="ion-social-skype"></i>
-										</a>
-									</li>
-									<li>
-										<a href="#" class="rss">
-											<svg><rect width="0" height="0"/></svg>
-											<i class="ion-social-rss"></i>
-										</a>
-									</li>
+									
+								
 								</ul>
 							</div>
 						</div>
@@ -457,17 +406,16 @@ $(function next(){
 				<div class="row">
 					<div class="col-md-12">
 						<div class="copyright">
-							COPYRIGHT &copy; MAGZ 2017. ALL RIGHT RESERVED.
+							COPYRIGHT &copy; abstract comypany.
 							<div>
-								Made with <i class="ion-heart"></i> by jq22
+								Made with <i class="ion-heart"></i> by wan
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		
 		</footer>
-		<!-- End Footer -->
+		
 
 		<!-- JS -->
 		<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>

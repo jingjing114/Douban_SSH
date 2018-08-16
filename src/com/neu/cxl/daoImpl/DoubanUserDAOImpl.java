@@ -106,6 +106,17 @@ public class DoubanUserDAOImpl implements DoubanUserDAO{
 		query.setString(1, DoubanUser.getUsername());
 		return query.executeUpdate();
 	}
+
+	@Override
+	public DoubanUser checkDoubanUserPhone(DoubanUser DoubanUser) {
+		
+			Criteria criteria=this.getCurrentSession().createCriteria(DoubanUser.class);
+			Criterion criterion=Restrictions.eq("phone",DoubanUser.getPhone());
+			criteria.add(criterion);
+			
+			return (com.neu.cxl.entity.DoubanUser) criteria.uniqueResult();
+		}
+	
 	
 
 	

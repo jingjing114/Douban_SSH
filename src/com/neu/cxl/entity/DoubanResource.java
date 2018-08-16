@@ -13,11 +13,11 @@ public class DoubanResource  implements java.io.Serializable {
 
      private String movieid;
      private String moviename;
-     private String avgscore;
+     private Float avgscore;
      private String movietype;
      private String movieactorid;
      private String movieimgurl;
-     private String moviereviewnumber;
+     private Integer moviereviewnumber;
      private String moviedescription;
      private String moviearea;
      private String movieyear;
@@ -35,7 +35,7 @@ public class DoubanResource  implements java.io.Serializable {
 
     
     /** full constructor */
-    public DoubanResource(String moviename, String avgscore, String movietype, String movieactorid, String movieimgurl, String moviereviewnumber, String moviedescription, String moviearea, String movieyear, String moviedirectorid, String movietime, String movielanguage, String movieurl) {
+    public DoubanResource(String moviename, Float avgscore, String movietype, String movieactorid, String movieimgurl, Integer moviereviewnumber, String moviedescription, String moviearea, String movieyear, String moviedirectorid, String movietime, String movielanguage, String movieurl) {
         this.moviename = moviename;
         this.avgscore = avgscore;
         this.movietype = movietype;
@@ -70,11 +70,11 @@ public class DoubanResource  implements java.io.Serializable {
         this.moviename = moviename;
     }
 
-    public String getAvgscore() {
+    public Float getAvgscore() {
         return this.avgscore;
     }
     
-    public void setAvgscore(String avgscore) {
+    public void setAvgscore(Float avgscore) {
         this.avgscore = avgscore;
     }
 
@@ -102,11 +102,11 @@ public class DoubanResource  implements java.io.Serializable {
         this.movieimgurl = movieimgurl;
     }
 
-    public String getMoviereviewnumber() {
+    public Integer getMoviereviewnumber() {
         return this.moviereviewnumber;
     }
     
-    public void setMoviereviewnumber(String moviereviewnumber) {
+    public void setMoviereviewnumber(Integer moviereviewnumber) {
         this.moviereviewnumber = moviereviewnumber;
     }
 

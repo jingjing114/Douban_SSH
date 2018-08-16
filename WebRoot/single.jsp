@@ -45,20 +45,42 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   .div_img img{width:100%;height:100%}
   #div_assis{width:100px;height:100px}
 </style>
-<script src="script/jquery.js"></script>
+<script src="scripts/jquery.js"></script>
 <script>
 function publish()
   {
   window.open("updateInfo.jsp",'用户资料','height=300,width=520,top=400,left=800,toolbar=no,menubar=no,scrollbars=no,resizable=no,location=no,status=no');
-
   }
   function publishIcon()
   {
   window.open("uploadIcon.jsp",'用户头像','height=300,width=520,top=400,left=800,toolbar=no,menubar=no,scrollbars=no,resizable=no,location=no,status=no');
-
   }
   
   
+$(function prev(){
+	var pagecode=<%=request.getAttribute("pageCode")%>;
+	if(pagecode<=1)
+	{
+		$('#prev_page').css('display','none')
+		
+	}
+	$('#prev_page').on('mouseover', 'a', function (e){
+    var url="reviewaction_selectReview?user.username=${sessionScope.user.getUsername()}&pageCode="+(pagecode-1);
+    
+    $(e.target).attr("href",url);})
+});
+
+$(function next(){
+	var pagecode=<%=request.getAttribute("pageCode")%>;
+	
+	if("${requestScope.reviewInfo}"=='[]')
+	{
+		$('#next_page').css('display','none')
+	}
+	$('#next_page').on('mouseover', 'a', function (e){
+    var url="reviewaction_selectReview?user.username=${sessionScope.user.getUsername()}&pageCode="+(pagecode+1);
+    $(e.target).attr("href",url);})
+});
 </script>
 	<body>
 		<header class="primary">
@@ -289,7 +311,17 @@ function publish()
   		<!--  <a id="delete_a" href="javascript:void(0);" onclick="deletereview()" >删除</a>-->
   		  <hr style=" height:2px;border:none;border-top:2px dotted #185598;"size=2>
   		 </c:forEach></span>
-  		 
+  		     <div id="footer">
+            <div class="footer-extra"></div>
+         <div class="col-md-12 text-center">
+		            <ul class="pagination" id="page">
+		              <li class="prev" id="prev_page"><a href="#" ><i class="ion-ios-arrow-left"></i></a></li>
+		          
+		              <li class="next" id="next_page"><a href="#"><i class="ion-ios-arrow-right"></i></a></li>
+		            </ul>
+		            
+		          </div>
+		          </div>
   		
 								<div class="line"></div>
 
@@ -304,12 +336,15 @@ function publish()
 						</div>
 						<div class="author">
 					
-							<figure>
+							<div class=" col-sm-2" style="margin-top: 19px;">
 								
 							<div class="div_img">
-								<img src="${sessionScope.user.getIcon()}">
+							<img src="${sessionScope.user.getIcon()}">		
 								</div>
-							</figure>
+								<br>
+								
+									<span><a href="#" onclick="publishIcon()">更改头像</a></span>
+							</div>
 							
 							<div class="details">
 								<div class="job">${sessionScope.user.getRole()}</div>
@@ -344,7 +379,7 @@ function publish()
 									</li>
 								</ul>
 							</div>
-							<a href="#" onclick="publishIcon()">更改头像</a>
+				
 						</div>
 						
 						
@@ -719,3 +754,4 @@ function publish()
 		<script src="js/e-magz.js"></script>
 	</body>
 </html>
+

@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.*,com.neu.cxl.entity.DoubanUser" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
 <%
 String path = request.getContextPath();
@@ -89,7 +89,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   
   
   
-  
+   	<%
+		DoubanUser user=(DoubanUser)session.getAttribute("admin");
+		if(!("管理员".equals((String)user.getRole())))
+		{
+			out.println("您还没有登录，请先登录！<br>");
+			out.println("3秒后跳转到登录页面...<br>");
+			response.setHeader("Refresh","3;URL=../login.jsp"); 
+
+			out.println("如果没有跳转，请点击<a href='login.jsp'>这里</a>跳转！");
+			
+		}
+		else {
+		%>
   
   
   
@@ -115,10 +127,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		
 		
 		
-          <div id="wrapper">
- 
- 
-       
+          <div id="wrapper"> 
         <nav class="top1 navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -127,7 +136,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">欢迎管理员${sessionScope.user.getUsername()}登录！</a>
+                <a class="navbar-brand" href="#">欢迎管理员${sessionScope.admin.getUsername()}登录！</a>
             </div>
             
             
@@ -173,12 +182,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         
                         <li>
                             <a href="JSP/movieManage.jsp"><i class="fa fa-indent nav_icon"></i>电影管理<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
+                           <ul class="nav nav-second-level">
                                   <li>
                                     <a href="adminaction_selectMovie">查看电影</a>
                                 </li>
                                 <li>
                                     <a href="JSP/movieAdd.jsp">添加电影</a>
+                                </li>
+                                 <li>
+                                    <a href="adminaction_selectType">查看电影类型</a>
                                 </li>
                                    <li>
                                     <a href="adminaction_selectActor">查看演员</a>
@@ -235,10 +247,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	   
 	   
 	   <br>
-	   
+	   <div class="form">
       
        <h3>演员信息添加</h3>
-     <form action="adminaction_addActor" method="post"  enctype="multipart/form-data" style="margin-left:400px;">
+     <form action="adminaction_addActor" method="post"  enctype="multipart/form-data" >
         
 		<input type="hidden" name="atm.movieid" value="<%=session.getAttribute("movieid") %>">
 		<input type="hidden" name="resource.movieid" value="<%=session.getAttribute("movieid") %>">
@@ -248,7 +260,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		生日：<input type="text" name="actor.actorbirthday" ><br>		
 		职业：<input type="text" name="actor.actorwork" ><br>
 		出生地区：<input type="text" name="actor.actorborned" "><br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		
 		个人照片：<input type="file" name="myfile" ><br>
 		个人简介：
 		<textarea name="actor.actorintroduction" cols="25" rows="7" align="left">
@@ -258,7 +270,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<input type="reset" value="重置"><br>
 		</form>
   
-     </from>
+     </div>
      
 	   <br>
 	  
@@ -294,15 +306,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   
   input{margin:10px 10px 10px 10px;}
   
-  <style>
+  </style>
   
   
   
   
   
-  
-  <style>
-  
+	<%}%>
   
   
  

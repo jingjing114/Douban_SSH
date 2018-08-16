@@ -32,12 +32,12 @@ public class DoubanReviewDAOImpl implements DoubanReviewDAO{
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public ArrayList<DoubanReview> selectReview(DoubanUser user) {
+	public ArrayList<DoubanReview> selectReview(DoubanUser user,int pageSize,int pageCode) {
 		String queryString = "from DoubanReview r where r.reviewuser=? order by reviewtime desc";
 		Query queryObject = this.getCurrentSession().createQuery(queryString);
 		queryObject.setString(0,user.getUsername());
-		queryObject.setFirstResult(0);
-		queryObject.setMaxResults(10);
+		queryObject.setFirstResult((pageCode-1)*pageSize);
+		queryObject.setMaxResults(pageSize);
 		return (ArrayList<DoubanReview>) queryObject.list();
 	}
 
@@ -78,6 +78,24 @@ public class DoubanReviewDAOImpl implements DoubanReviewDAO{
 		queryObject.setFirstResult((pageCode-1)*pageSize);
 		queryObject.setMaxResults(pageSize);
 		return (ArrayList<DoubanReview>) queryObject.list();
+	}
+
+	@Override
+	public int updateAvgscore(DoubanResource doubanResource,DoubanReview review) {
+		String hql="update DoubanResource m set m.avgscore =(m.avgscore*m.moviereviewnumber+?)/(m.moviereviewnumber+1) where m.movieid = ?";
+		Query query = this.getCurrentSession().createQuery(hql);
+		query.setFloat(0, review.getReviewscore());
+		query.setString(1, review.getReviewmovieid());
+		return query.executeUpdate();
+	}
+
+	@Override
+	public int updateReviewnumber(DoubanResource doubanResource,DoubanReview review) {
+		String hql="update DoubanResource m set m.moviereviewnumber=m.moviereviewnumber+1 where m.movieid = ?";
+		Query query = this.getCurrentSession().createQuery(hql);
+		
+		query.setString(0, review.getReviewmovieid());
+		return query.executeUpdate();
 	}
 
 }

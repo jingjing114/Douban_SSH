@@ -18,7 +18,7 @@ public class DoubanReview  implements java.io.Serializable {
      private Integer reviewgoodcount;
      private String reviewtime;
      private String reviewmoviename;
-     private String reviewscore;
+     private Float reviewscore;
 
 
     // Constructors
@@ -29,7 +29,7 @@ public class DoubanReview  implements java.io.Serializable {
 
     
     /** full constructor */
-    public DoubanReview(String reviewuser, String reviewcontent, String reviewmovieid, Integer reviewgoodcount, String reviewtime, String reviewmoviename, String reviewscore) {
+    public DoubanReview(String reviewuser, String reviewcontent, String reviewmovieid, Integer reviewgoodcount, String reviewtime, String reviewmoviename, Float reviewscore) {
         this.reviewuser = reviewuser;
         this.reviewcontent = reviewcontent;
         this.reviewmovieid = reviewmovieid;
@@ -98,11 +98,11 @@ public class DoubanReview  implements java.io.Serializable {
         this.reviewmoviename = reviewmoviename;
     }
 
-    public String getReviewscore() {
+    public Float getReviewscore() {
         return this.reviewscore;
     }
     
-    public void setReviewscore(String reviewscore) {
+    public void setReviewscore(Float reviewscore) {
         this.reviewscore = reviewscore;
     }
    

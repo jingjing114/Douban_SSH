@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.neu.cxl.dao.DoubanResourceDAO;
 import com.neu.cxl.entity.DoubanResource;
+import com.neu.cxl.entity.DoubanType;
 @Transactional
 @Repository("doubanResourceDAO")
 public class DoubanResourceDAOImpl implements DoubanResourceDAO{
@@ -54,7 +55,7 @@ public class DoubanResourceDAOImpl implements DoubanResourceDAO{
 	@SuppressWarnings("unchecked")
 	@Override
 	public ArrayList<DoubanResource> selectMovieByNameKeyword(DoubanResource doubanResource,int pageSize,int pageCode) {
-		String queryString = "from DoubanResource m where m.moviename like ?";
+		String queryString = "from DoubanResource m where m.moviename like ? order by m.avgscore desc";
 		Query queryObject = this.getCurrentSession().createQuery(queryString);
 		queryObject.setString(0, "%"+doubanResource.getMoviename()+"%");
 		queryObject.setFirstResult((pageCode-1)*pageSize);
@@ -65,7 +66,7 @@ public class DoubanResourceDAOImpl implements DoubanResourceDAO{
 	@SuppressWarnings("unchecked")
 	@Override
 	public ArrayList<DoubanResource> selectMovieByType(DoubanResource doubanResource,int pageSize,int pageCode) {
-		String queryString = "from DoubanResource m where m.movietype like ?";
+		String queryString = "from DoubanResource m where m.movietype like ? order by m.avgscore desc";
 		Query queryObject = this.getCurrentSession().createQuery(queryString);
 		queryObject.setString(0, "%"+doubanResource.getMovietype()+"%");
 		queryObject.setFirstResult((pageCode-1)*pageSize);
@@ -76,7 +77,7 @@ public class DoubanResourceDAOImpl implements DoubanResourceDAO{
 	@SuppressWarnings("unchecked")
 	@Override
 	public ArrayList<DoubanResource> selectMovieByYear(DoubanResource doubanResource,int pageSize,int pageCode) {
-		String queryString = "from DoubanResource m where m.movieyear like ?";
+		String queryString = "from DoubanResource m where m.movieyear like ? order by m.avgscore desc";
 		Query queryObject = this.getCurrentSession().createQuery(queryString);
 		queryObject.setString(0, "%"+doubanResource.getMovieyear()+"%");
 		queryObject.setFirstResult((pageCode-1)*pageSize);
@@ -87,9 +88,9 @@ public class DoubanResourceDAOImpl implements DoubanResourceDAO{
 	@SuppressWarnings("unchecked")
 	@Override
 	public ArrayList<DoubanResource> selectMovieByScore(DoubanResource doubanResource,int pageSize,int pageCode) {
-		String queryString = "from DoubanResource m where m.avgscore > ?";
+		String queryString = "from DoubanResource m where m.avgscore > ?  order by m.avgscore desc";
 		Query queryObject = this.getCurrentSession().createQuery(queryString);
-		queryObject.setString(0, doubanResource.getAvgscore());
+		queryObject.setFloat(0, doubanResource.getAvgscore());
 		queryObject.setFirstResult((pageCode-1)*pageSize);
 		queryObject.setMaxResults(pageSize);
 		return (ArrayList<DoubanResource>) queryObject.list();
@@ -98,7 +99,7 @@ public class DoubanResourceDAOImpl implements DoubanResourceDAO{
 	@SuppressWarnings("unchecked")
 	@Override
 	public ArrayList<DoubanResource> selectMovieByActor(DoubanResource doubanResource,int pageSize,int pageCode) {
-		String queryString = "from DoubanResource m where m.movieactorid like ?";
+		String queryString = "from DoubanResource m where m.movieactorid like ? order by m.avgscore desc";
 		Query queryObject = this.getCurrentSession().createQuery(queryString);
 		queryObject.setString(0, "%"+doubanResource.getMovieactorid()+"%");
 		queryObject.setFirstResult((pageCode-1)*pageSize);
@@ -110,10 +111,9 @@ public class DoubanResourceDAOImpl implements DoubanResourceDAO{
 	@Override
 	public ArrayList<DoubanResource> selectMovieSortByScore() {
 		
-		String queryString = "from DoubanResource order by moviereviewnumber desc ";
+		String queryString = "from DoubanResource where avgscore>9 order by acgscore desc ";
 		Query queryObject = this.getCurrentSession().createQuery(queryString);
-		queryObject.setFirstResult(0);
-		queryObject.setMaxResults(8);
+		
 		return (ArrayList<DoubanResource>) queryObject.list();
 	}
 	//热度排行榜
@@ -127,7 +127,13 @@ public class DoubanResourceDAOImpl implements DoubanResourceDAO{
 		queryObject.setMaxResults(10);
 		return (ArrayList<DoubanResource>) queryObject.list();
 	}
-
-
+	//查询电影类型
+	@SuppressWarnings("unchecked")
+	@Override
+	public ArrayList<DoubanType> selectMovieType() {
+		String queryString = "from DoubanType";
+		Query queryObject = this.getCurrentSession().createQuery(queryString);
+		return (ArrayList<DoubanType>) queryObject.list();
+	}
 	
 }

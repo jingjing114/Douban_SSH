@@ -171,14 +171,16 @@ public class UserAction extends ActionSupport{
 	{
 		if(this.doubanUserService.findDoubanUser(user)!=null)
 		{
-			ServletActionContext.getRequest().getSession().setAttribute("user", this.doubanUserService.findDoubanUser(user));
+			
 			//System.out.println(this.doubanUserService.findDoubanUser(user).getUsername());
 			if("管理员".equals(this.doubanUserService.findDoubanUser(user).getRole()))
 			{
+				ServletActionContext.getRequest().getSession().setAttribute("admin", this.doubanUserService.findDoubanUser(user));
 				return "admin";
 			}
 			else
 				{
+				ServletActionContext.getRequest().getSession().setAttribute("user", this.doubanUserService.findDoubanUser(user));
 				return "main";
 				}
 		}
@@ -209,6 +211,25 @@ public class UserAction extends ActionSupport{
 		}
 		
 	}
+	//检查手机号
+	public void checkDoubanUserPhone() throws IOException
+	{
+
+		if(this.doubanUserService.checkDoubanUserPhone(user)==null)
+		{
+			HttpServletResponse response=ServletActionContext.getResponse();
+			response.setContentType("text/html;charset=utf-8");
+			response.getWriter().print("手机号可以注册");
+			
+		}
+		else
+		{
+			HttpServletResponse response=ServletActionContext.getResponse();
+			response.setContentType("text/html;charset=utf-8");
+			response.getWriter().print("手机号已被注册");
+			
+		}
+	}
 //查看个人资料
 	public String  selectDoubanUserInfo() 
 	{
@@ -219,6 +240,7 @@ public class UserAction extends ActionSupport{
 //修改个人资料
 	public void updateDoubanUserInfo() throws IOException
 	{
+
 		HttpServletResponse response = ServletActionContext.getResponse();
 		HttpServletRequest request = ServletActionContext.getRequest();
 		response.addHeader("Content-Type", "text/html;charset=utf-8");

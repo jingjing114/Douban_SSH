@@ -1,9 +1,11 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.*,com.neu.cxl.entity.DoubanUser" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
+
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -81,31 +83,20 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   <body>
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-    
-  <body >
-  
-		
-		
-		
-		
-		
-		
-		
-		
+   	<%
+		DoubanUser user=(DoubanUser)session.getAttribute("admin");
+		if(!("管理员".equals((String)user.getRole())))
+		{
+			out.println("您还没有登录，请先登录！<br>");
+			out.println("3秒后跳转到登录页面...<br>");
+			response.setHeader("Refresh","3;URL=../login.jsp"); 
+
+			out.println("如果没有跳转，请点击<a href='login.jsp'>这里</a>跳转！");
+			
+		}
+		else {
+		%>
+
 		
 		
 		
@@ -120,7 +111,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">欢迎管理员${sessionScope.user.getUsername()}登录！</a>
+                <a class="navbar-brand" href="#">欢迎管理员${sessionScope.admin.getUsername()}登录！</a>
             </div>
             
             
@@ -172,6 +163,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 </li>
                                 <li>
                                     <a href="JSP/movieAdd.jsp">添加电影</a>
+                                </li>
+                                  <li>
+                                    <a href="adminaction_selectType">查看电影类型</a>
                                 </li>
                                    <li>
                                     <a href="adminaction_selectActor">查看演员</a>
@@ -293,7 +287,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   
   
   
-  
+  	<%}%>
   
   
   

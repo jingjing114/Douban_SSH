@@ -264,7 +264,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								</div>
 								<div class="form-group">
 									<label class="fw">密码
-										<a href="passwordchange.html" class="pull-right" required>忘记密码?</a>
+										<a href="passwordchange.jsp" class="pull-right" required>忘记密码?</a>
 									</label>
 									<input type="password" name="user.password" id="password" class="form-control">
 								</div>
@@ -275,7 +275,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<input type="submit" class="btn btn-primary btn-block" value="登录" >	
 								</div>-->
 								<div class="form-group text-center">
-									<span class="text-muted">没有账户?</span> <a href="register.html">Create one</a>
+									<span class="text-muted">没有账户?</span> <a href="register.jsp">Create one</a>
 								</div>
 								<div class="title-line">
 									or

@@ -1,9 +1,13 @@
 <%@ page language="java" import="java.util.*,com.neu.cxl.entity.DoubanUser" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
+<c:if test="${movietype==null}">
+<s:action name="adminaction_selectType2" executeResult="true" namespace="/"/>
+</c:if>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -41,41 +45,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 <script src="JSP/js/d3.v3.js"></script>
 <script src="JSP/js/rickshaw.js"></script>
-<style>
-.line{
-height:1px;
-background-color:#999;
-}
-.line2{
-height:1px;
-width:70px;
-background-color:#999;
-}
-</style>
- <script>
-    function confirmDel(id)
-  {
-  	if(window.confirm("您确定要删除该条评论吗?"))
-  	{
-  		return true;
-  	}
-  	else
-  	{
-  		return false;
-  	}
-  
-}
-  </script>
+
   </head>
+  <script>
+  function show()
+  {
   
+  	var addtypediv=document.getElementById("addtype");
+  	addtypediv.style.display="block"
+  }
+  </script>
   <body>
-  
-		
-		
-		
-		
-		
-		 	<%
+ 	<%
 		DoubanUser user=(DoubanUser)session.getAttribute("admin");
 		if(!("管理员".equals((String)user.getRole())))
 		{
@@ -88,15 +69,9 @@ background-color:#999;
 		}
 		else {
 		%>
-		
-		
-		
-		
-		
           <div id="wrapper">
- 
- 
-         <nav class="top1 navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+
+        <nav class="top1 navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -106,9 +81,7 @@ background-color:#999;
                 </button>
                 <a class="navbar-brand" href="#">欢迎管理员${sessionScope.admin.getUsername()}登录！</a>
             </div>
-            
-            
-            
+ 
             <!-- /.navbar-header -->
             <ul class="nav navbar-nav navbar-right">
 				
@@ -222,37 +195,28 @@ background-color:#999;
 		    <thead>
 		        <tr >
 		     
-		          <th>${requestScope.reviewuser}的评论记录：<br> </th>
-		  
+		          <th>类型ID</th>
+		          <th>类型名</th>
 		       
 		        </tr>
 		      </thead>
+		      <tr>
 		      
-		      <tr><td>
-		    <c:forEach var="review" items="${requestScope.review}" varStatus="status">
-    
+		    <c:forEach var="type" items="${requestScope.movietype}">
+       
+        <td>  ${type.getTypeid()}&nbsp;&nbsp;</td>          
+	<td> ${type.getTypename()}<br><td>
 
-	 <div id="${status}">
-	
-${review.getReviewmoviename()}&nbsp;&nbsp;&nbsp;&nbsp;${review.getReviewtime()} <br>	
-<div class="line2"></div>
-
-	${review.getReviewcontent()}<br>
-	<br>
 	 
-<span   style="margin-left: 510px;">	<button type="button" class="btn btn-outline-secondary" style="margin-bottom:10px;"><a href="adminaction_deleteReview?review.reviewid=${review.getReviewid()}&user.username=${review.getReviewuser()}" onclick="return confirmDel()">删除</a></button></span><br>
-	<div class="line"></div>
-	
-		
-			<br>
-
-
-	 </div>
+	  </tr>
+	 
     </c:forEach>
-    <td><tr>
+    
     
        </table>
-       
+       	<div id="addtype" style="display:none"><form action="adminaction_addType" method="post">类型名:<input type="text" name="type.typename"> &nbsp;
+       	<input type="submit" value="提交"></form></div>
+        <div style="margin-left: 486px;"> <button type="button" class="btn btn-info" style="margin-right: 5px;"  onclick="show()"> 新增&nbsp;</button></div>
        
        
 		   </div>
@@ -338,4 +302,5 @@ ${review.getReviewmoviename()}&nbsp;&nbsp;&nbsp;&nbsp;${review.getReviewtime()} 
     	<%}%>
 </body>
 
-<html>
+
+ </html>

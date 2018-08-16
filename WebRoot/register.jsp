@@ -101,6 +101,28 @@ xmlHttpReq.open("get",url,true);
 //向服务器发送请求
 xmlHttpReq.send(null);
 }
+
+
+//检测手机号是否已经被注册
+function checkPhone()
+{
+var phone = document.getElementById("phone").value;
+if(phone=="")
+{
+    alert("手机号必须填写！");
+    return false;
+}
+//首先创建精灵对象
+createXmlHttpRequest();
+//指明准备状态改变时回调的函数名
+xmlHttpReq.onreadystatechange=handle;
+//尝试以异步的get方式访问某个URL
+//请求服务器端的一个servlet
+var url = "useraction_checkDoubanUserPhone?user.phone="+phone;
+xmlHttpReq.open("get",url,true);
+//向服务器发送请求
+xmlHttpReq.send(null);
+}
 //状态发生改变时回调的函数
 function handle()
 {
@@ -112,9 +134,9 @@ function handle()
        {
            var res = xmlHttpReq.responseText;
            
-           if(res=='用户名已被占用')
+           if(res=='手机号已被注册')
            {
-           	document.getElementById("username").value="";
+           	document.getElementById("phone").value="";
            	
            }
            var result = document.getElementById("result");
@@ -370,7 +392,7 @@ function handle()
 								</div>-->
 								<div class="form-group">
 									<label>手机</label>
-									<input type="text" id="phone" name="user.phone" class="form-control" required>
+									<input type="text" id="phone" name="user.phone" onblur="checkPhone()" class="form-control" required>
 									<font color="red"><s:fielderror fieldName="user.phone"></s:fielderror></font>
 								</div>
 								<div class="form-group">
@@ -383,7 +405,7 @@ function handle()
 									<button class="btn btn-primary btn-block">注册</button>
 								</div>
 								<div class="form-group text-center">
-									<span class="text-muted">已经注册？</span> <a href="login.html">登录</a>
+									<span class="text-muted">已经注册？</span> <a href="login.jsp">登录</a>
 								</div>
 							</form>
 						</div>

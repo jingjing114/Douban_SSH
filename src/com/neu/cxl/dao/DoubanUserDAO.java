@@ -16,7 +16,7 @@ public interface DoubanUserDAO {
 	public int uploadIcon(DoubanUser DoubanUser);
 	public int updatePassword(DoubanUser DoubanUser);
 	public List<DoubanUser> FindAll();
-	
+	public DoubanUser checkDoubanUserPhone(DoubanUser DoubanUser);
 	
 	
 	

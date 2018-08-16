@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*,com.neu.cxl.entity.DoubanUser" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -51,7 +52,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </style>
 
 <script>
-	function show(){
+	window.onload=function show(){
 
 var session="<%=session.getAttribute("user")%>"
 //alert(session)
@@ -67,7 +68,7 @@ else
 
 }
 </script>
-	<body  onload="show()" class="skin-orange">
+	<body  class="skin-orange">
 
 		<header class="primary">
 			<div class="firstbar">
@@ -147,7 +148,7 @@ else
 								<ul class="dropdown-menu">
 								
 									<li><a href="in_index.jsp">主页</a></li>
-									<li><a href="moviesearch.jsp">电影</a></li>
+									<li><a href="movieaction_selectMovie">电影</a></li>
 									
 								
 									<li><a href="#">更多</a></li>
@@ -306,8 +307,8 @@ else
 									</figure>
 									
 									<div class="details">
-										<div class="category"><a href="category.html">了解更多</a></div>
-										<h1><a href="SelectMoviePageServlet?movieid=241">我不是药神大卖，票房接近30亿</a></h1>
+										<div class="category"><a href="#">了解更多</a></div>
+										<h1><a href="movieaction_movieInfo?resource.movieid=241">我不是药神大卖，票房接近30亿</a></h1>
 										<div class="time">2018 7 8</div>
 									</div>
 								</article>
@@ -319,7 +320,7 @@ else
 										<img src="images/news/img14.jpg" alt="Sample Article">
 									</figure>
 									<div class="details">
-										<div class="category"><a href="category.html">Travel</a></div>
+										<div class="category"><a href="#">Travel</a></div>
 										<h1><a href="single.jsp">Class aptent taciti sociosqu ad litora torquent per conubia nostra</a></h1>
 										<div class="time">December 10, 2016</div>
 									</div>
@@ -345,7 +346,7 @@ else
 										<img src="images/news/img05.jpg" alt="Sample Article">
 									</figure>
 									<div class="details">
-										<div class="category"><a href="category.html">Lifestyle</a></div>
+										<div class="category"><a href="#">Lifestyle</a></div>
 										<h1><a href="single.jsp">Mauris elementum libero at pharetra auctor Fusce ullamcorper elit</a></h1>
 										<div class="time">November 27, 2016</div>
 									</div>
@@ -464,6 +465,179 @@ else
 
 		
 
+
+
+			<footer class="footer">
+			
+			<div class="container">
+				<div class="row">
+					<div class="col-md-3 col-sm-6 col-xs-12">
+						<div class="block">
+							<h1 class="block-title">公司简介</h1>
+							<div class="block-body">
+								<figure class="foot-logo">
+ <img src="images/logo.png">
+ 	
+								</figure>
+								<p class="brand-description">
+									抽象电影网是由任龙飞同学创建的一个抽象的电影评论网站。
+								</p>
+								<a href="page.html" class="btn btn-magz white">关于我们<i class="ion-ios-arrow-thin-right"></i></a>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3 col-sm-6 col-xs-12">
+						<div class="block">
+							<h1 class="block-title">热门标签<div class="right"><a href="#">全部查看<i class="ion-ios-arrow-thin-right"></i></a></div></h1>
+							<div class="block-body">
+								<ul class="tags">
+									<li><a href="#">动作片</a></li>
+									<li><a href="#">动漫</a></li>
+									<li><a href="#">纪录片</a></li>
+									<li><a href="#">电影剧照</a></li>
+									<li><a href="#">评分</a></li>
+									<li><a href="#">热门影评</a></li>
+									<li><a href="#">影院热映</a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="line"></div>
+						<div class="block">
+							<h1 class="block-title">订阅抽象</h1>
+							<div class="block-body">
+								<p>告诉我们您的邮箱，您将会收到关于抽象的更多资讯</p>
+								<form class="newsletter">
+									<div class="input-group">
+										<div class="input-group-addon">
+											<i class="ion-ios-email-outline"></i>
+										</div>
+										<input type="email" class="form-control email" placeholder="Your mail">
+									</div>
+									<button class="btn btn-primary btn-block white">订阅</button>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3 col-sm-6 col-xs-12">
+						<div class="block">
+							<h1 class="block-title">最近新闻</h1>
+							<div class="block-body">
+								<article class="article-mini">
+									<div class="inner">
+										<figure>
+											<a href="single.html">
+												<img src="images/pic3.jpg" alt="Sample Article">
+											</a>
+										</figure>
+										<div class="padding">
+											<h1><a href="single.html"> 《狄仁杰》 剧组全国巡演开始，第一站大连 </a></h1>
+										</div>
+									</div>
+								</article>
+								<article class="article-mini">
+									<div class="inner">
+										<figure>
+											<a href="single.html">
+												<img src="images/pic6.jpg" alt="Sample Article">
+											</a>
+										</figure>
+										<div class="padding">
+											<h1><a href="single.html">华谊兄弟入股抽象电影网，双方达成战略协议</a></h1>
+										</div>
+									</div>
+								</article>
+								<article class="article-mini">
+									<div class="inner">
+										<figure>
+											<a href="single.html">
+												<img src="images/pic7.jpg" alt="Sample Article">
+											</a>
+										</figure>
+										<div class="padding">
+											<h1><a href="single.html">抽象影业昨日召开发布会，产业布局重新生态链 </a></h1>
+										</div>
+									</div>
+								</article>
+								
+								<a href="#" class="btn btn-magz white btn-block">查看 全部<i class="ion-ios-arrow-thin-right"></i></a>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3 col-xs-12 col-sm-6">
+						<div class="block">
+							<h1 class="block-title">关注我们</h1>
+							<div class="block-body">
+								<p>关注我们并了解抽象电影网的最新动态</p>
+								<ul class="social trp">
+									<li>
+										<a href="#" >
+											<img src="images/vxlogo.jpg" alt="weixin">
+									
+										</a>
+									</li>
+									<li>
+										<a href="#" >
+										
+											<img src="images/weibologo.jpg"alt="weibo">
+										</a>
+									</li>
+									<li>
+										<a href="#">
+										<img src="images/qqzone.jpg" alt="qqzone">
+										</a>
+									</li>
+										<li>
+										<a href="#" class="facebook">
+											<svg><rect width="0" height="0"/></svg>
+											<i class="ion-social-facebook"></i>
+										</a>
+									</li>
+									
+									<li>
+										<a href="#" class="youtube">
+											<svg><rect width="0" height="0"/></svg>
+											<i class="ion-social-youtube-outline"></i>
+										</a>
+									</li>
+									
+								
+									<li>
+										<a href="#" class="twitter">
+											<svg><rect width="0" height="0"/></svg>
+											<i class="ion-social-twitter-outline"></i>
+										</a>
+									</li>
+									
+								
+								</ul>
+							</div>
+						</div>
+						<div class="line"></div>
+						<div class="block">
+							<div class="block-body no-margin">
+								<ul class="footer-nav-horizontal">
+									<li><a href="index.html">Home</a></li>
+									<li><a href="#">Partner</a></li>
+									<li><a href="contact.html">Contact</a></li>
+									<li><a href="page.html">About</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="copyright">
+							COPYRIGHT &copy; abstract comypany.
+							<div>
+								Made with <i class="ion-heart"></i> by wan
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+		<!-- End Footer -->
 		
 		<!-- JS -->
 		<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
